@@ -52,7 +52,7 @@ Matrix operator*(const Matrix &a, int scalair) {
 Matrix operator*(const Matrix &a, const Matrix &b) {
     // Checks
     if(a.matrix[0].size() != b.matrix.size()) {
-        throw "Matrix size is not correct for multiplying";
+        throw std::string("Matrix size is not correct for multiplying");
     }
 
     std::vector<std::vector<float>> newMatrix(a.matrix.size(), std::vector<float>(b.matrix[0].size()));
