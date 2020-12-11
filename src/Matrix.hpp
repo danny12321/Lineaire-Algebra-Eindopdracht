@@ -18,8 +18,6 @@ public:
     int getRows() { return matrix.size(); }
     void pushOne() { matrix.push_back({1}); }
 
-    int add(int a, int b) {return a + b;}
-
     friend Matrix operator+(const Matrix& a, const Matrix& b);
     friend Matrix operator-(const Matrix& a, const Matrix& b);
     friend Matrix operator*(int scalair, const Matrix& a);
@@ -29,8 +27,8 @@ public:
 
 //    static Matrix getTranslationMatrix(float tx, float ty, float tz);
     static Matrix getRotationMatrixX(float deg);
-//    static Matrix getRotationMatrixY(float deg);
-//    static Matrix getRotationMatrixZ(float deg);
+    static Matrix getRotationMatrixY(float deg);
+    static Matrix getRotationMatrixZ(float deg);
 //
 //    static Matrix getRotationMatrixM1(Matrix m);
 //    static Matrix getRotationMatrixM2(Matrix m);

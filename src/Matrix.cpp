@@ -81,3 +81,27 @@ Matrix Matrix::getRotationMatrixX(float deg) {
                            { 0, 0, 0, 1}
                    }};
 }
+
+Matrix Matrix::getRotationMatrixY(float deg) {
+    float PI = std::atan(1.0f) * 4;
+    float rad = (deg / 180) * PI;
+
+    return Matrix {{
+                           { std::cos(rad), 0, std::sin(rad), 0 },
+                           { 0, 1, 0, 0},
+                           { -std::sin(rad), 0, std::cos(rad), 0 },
+                           { 0, 0, 0, 1}
+                   }};
+}
+
+Matrix Matrix::getRotationMatrixZ(float deg) {
+    float PI = std::atan(1.0f) * 4;
+    float rad = (deg / 180) * PI;
+
+    return Matrix {{
+                           { std::cos(rad), -std::sin(rad), 0, 0 },
+                           { std::sin(rad), std::cos(rad), 0, 0},
+                           { 0, 0, 1, 0 },
+                           { 0, 0, 0, 1}
+                   }};
+}
