@@ -9,9 +9,10 @@
 #include <vector>
 
 class Object3D {
+public:
     Object3D();
-private:
     std::vector<Line> lines;
+private:
 };
 
 

@@ -5,6 +5,8 @@
 #ifndef LINAL_VECTOR3D_HPP
 #define LINAL_VECTOR3D_HPP
 
+#include <cmath>
+#include <math.h>
 
 class Vector3D {
 public:

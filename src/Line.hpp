@@ -8,9 +8,11 @@
 #include "Vector3D.hpp"
 
 class Line {
-private:
+public:
+    Line(Vector3D start, Vector3D end) : start(start), end(end) {};
     Vector3D start;
     Vector3D end;
+private:
 };
 
 

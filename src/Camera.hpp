@@ -18,6 +18,9 @@ public:
     Matrix getRotationMatrix();
     Matrix getTranslationMatrix();
     Matrix getToOriginMatrix();
+
+    void increaseEye() {eye.setX(eye.getX() + 0.1f); eye.setZ(eye.getZ() + 0.1f);}
+    void decreaseEye() {eye.setX(eye.getX() - 0.1f); eye.setZ(eye.getZ() - 0.1f);}
 private:
     Vector3D eye;
     Vector3D lookat;

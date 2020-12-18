@@ -4,7 +4,7 @@
 
 #include "Events.hpp"
 
-void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRenderer) {
+void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRenderer, Camera& camera) {
     while( SDL_PollEvent( &e ) != 0 )
     {
         //User requests quit
@@ -15,10 +15,12 @@ void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRender
         if(e.type == SDL_MOUSEWHEEL) {
             if (e.wheel.y > 0) // scroll up
             {
-                coordinateSystem.plusXYLineSize(5);
+                camera.increaseEye();
+//                coordinateSystem.plusXYLineSize(5);
             } else if (e.wheel.y < 0) // scroll down
             {
-                coordinateSystem.minusXYLineSize(5);
+                camera.decreaseEye();
+//                coordinateSystem.minusXYLineSize(5);
             }
         }
         if(e.type == SDL_MOUSEMOTION)

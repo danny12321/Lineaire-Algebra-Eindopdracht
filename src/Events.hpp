@@ -6,12 +6,13 @@
 #define LINAL_EVENTS_HPP
 
 #include "CoordinateSystem.hpp"
+#include "Camera.hpp"
 
 class Events {
 public:
     Events() {};
 
-    void doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRenderer);
+    void doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRenderer, Camera& camera);
 private:
     SDL_Event e;
 };

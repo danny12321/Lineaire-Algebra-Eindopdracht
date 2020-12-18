@@ -12,11 +12,11 @@ Vector3D Camera::getRight() {
     Vector3D fakeUp {0,1,0};
     Vector3D dir = this->getDirection();
 
-    return fakeUp.crossProduct(dir).getEenheidsvector();
+    return (fakeUp.crossProduct(dir)).getEenheidsvector();
 }
 
 Vector3D Camera::getUp() {
-    return this->getDirection().crossProduct(this->getRight()).getEenheidsvector();
+    return (this->getDirection().crossProduct(this->getRight())).getEenheidsvector();
 }
 
 Matrix Camera::getRotationMatrix() {

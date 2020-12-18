@@ -9,10 +9,10 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 file(GLOB_RECURSE SOURCES src/*.cpp src/*.hpp)
-#file(GLOB_RECURSE TEST_SOURCES tests/*.cpp tests/*.hpp)
+file(GLOB_RECURSE TEST_SOURCES tests/*.cpp tests/*.hpp)
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-#add_executable(Tests ${TEST_SOURCES})
+add_executable(Tests ${TEST_SOURCES})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${CONAN_LIBS})
-#target_link_libraries(Tests ${CONAN_LIBS})
+target_link_libraries(Tests ${CONAN_LIBS})
