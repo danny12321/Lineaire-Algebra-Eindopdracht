@@ -114,7 +114,7 @@ TEST(Vector3D, GetLength)
     EXPECT_TRUE((result >= 3.73) && (result <= 3.75));
 }
 
-TEST(Vector3D, angleBetween)
+TEST(Vector3D, AngleBetween)
 {
     // Arrange
     Vector3D a {2,-1,0};
@@ -125,4 +125,16 @@ TEST(Vector3D, angleBetween)
 
     // Assert
     EXPECT_TRUE((result >= 63.8) && (result <= 64));
+}
+
+TEST(Vector3D, Eenheidsvector)
+{
+    // Arrange
+    Vector3D a {5,3,7};
+
+    // Act
+    Vector3D result = a.getEenheidsvector();
+
+    // Assert
+    ASSERT_EQ(result.getLength(), 1);
 }

@@ -7,11 +7,12 @@
 
 #include <iostream>
 #include <vector>
+#include "Vector3D.hpp"
 
 class Matrix {
 public:
     Matrix(std::vector<std::vector<float>> matrix) : matrix(matrix) {};
-//    Matrix(Vector2D &vector);
+    Matrix(Vector3D &vector);
 //    Matrix(float deg);
 
     float getNumber(int row, int col) { return matrix[row][col]; }

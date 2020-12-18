@@ -1,6 +1,14 @@
 
 #include "Matrix.hpp"
 
+Matrix::Matrix(Vector3D &vector) {
+    this->matrix = {
+            {vector.getX()},
+            {vector.getY()},
+            {vector.getZ()}
+    };
+}
+
 Matrix operator+(const Matrix &a, const Matrix &b) {
     // Checks
     if(a.matrix.size() != b.matrix.size()) throw "Matrices not same size";

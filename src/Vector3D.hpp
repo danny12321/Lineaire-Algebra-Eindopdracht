@@ -26,7 +26,7 @@ public:
     [[nodiscard]] float getZ() const { return z; }
 
     float getLength() const;
-//    Vector3D getEenheidsvector();
+    Vector3D getEenheidsvector();
 
     void setX(float x) { this->x = x; };
     void setY(float y) { this->y = y; };
