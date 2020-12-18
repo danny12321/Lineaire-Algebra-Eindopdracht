@@ -21,6 +21,10 @@ public:
 
     void increaseEye() {eye.setX(eye.getX() + 0.1f);}
     void decreaseEye() {eye.setX(eye.getX() - 0.1f);}
+
+    void setEyeX(float x) {eye.setX(x);}
+    void setEyeY(float y) {eye.setY(y);}
+    void setEyeZ(float z) {eye.setZ(z);}
 private:
     Vector3D eye;
     Vector3D lookat;

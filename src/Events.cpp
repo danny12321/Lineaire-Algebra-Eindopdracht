@@ -27,9 +27,12 @@ void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRender
         {
             int xMouse;
             int yMouse;
-            SDL_GetGlobalMouseState(&xMouse,&yMouse);
-            coordinateSystem.setMiddleX(xMouse);
-            coordinateSystem.setMiddleY(yMouse);
+            SDL_GetGlobalMouseState(&xMouse, &yMouse);
+//            std::cout << ((float)xMouse / 1500) << std::endl;
+            camera.setEyeX(((float)xMouse / 1500) * 10);
+            camera.setEyeY(((float)yMouse / 1000) * 10);
+//            coordinateSystem.setMiddleX(xMouse);
+//            coordinateSystem.setMiddleY(yMouse);
         }
 
     }
