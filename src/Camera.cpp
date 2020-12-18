@@ -11,7 +11,7 @@ Vector3D Camera::getDirection() {
 Vector3D Camera::getRight() {
     Vector3D fakeUp {0,1,0};
     Vector3D dir = this->getDirection();
-
+    auto cross = fakeUp.crossProduct(dir);
     return (fakeUp.crossProduct(dir)).getEenheidsvector();
 }
 

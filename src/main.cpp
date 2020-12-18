@@ -6,12 +6,11 @@
 #include "Object3D.hpp"
 
 int main() {
-
     SDLRenderer sdlRenderer;
     CoordinateSystem coordinateSystem {sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1};
     Events events;
 
-    Vector3D eye{0.1, 0.1, 0.1};
+    Vector3D eye{5, 5, 8};
     Vector3D lookat{0, 0, 0};
     Camera camera{eye, lookat};
     if(sdlRenderer.init()) {

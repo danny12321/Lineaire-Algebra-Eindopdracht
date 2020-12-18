@@ -45,6 +45,22 @@ TEST(Vector3D, CrossProduct)
     ASSERT_EQ(result.getZ(), 1);
 }
 
+TEST(Vector3D, CrossProductNogeen)
+{
+    // Arrange
+    Vector3D a { 1, 1, 0 };
+
+    Vector3D b { 0, 1, 0 };
+
+    // Act
+    Vector3D result = a.crossProduct(b);
+
+    // Assert
+    ASSERT_EQ(result.getX(), 0);
+    ASSERT_EQ(result.getY(), 0);
+    ASSERT_EQ(result.getZ(), 1);
+}
+
 TEST(Vector3D, IndependentOf)
 {
     // Arrange
@@ -137,4 +153,15 @@ TEST(Vector3D, Eenheidsvector)
 
     // Assert
     ASSERT_EQ(result.getLength(), 1);
+}
+
+TEST(Vector3D, EenheidsvectorZero)
+{
+    // Arrange
+    Vector3D a {0,0,0};
+
+    // Act
+    Vector3D result = a.getEenheidsvector();
+    // Assert
+    ASSERT_EQ(result.getLength(), 0);
 }
