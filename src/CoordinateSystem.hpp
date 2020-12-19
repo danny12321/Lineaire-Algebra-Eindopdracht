@@ -8,6 +8,8 @@
 #include <vector>
 #include "SDLRenderer.hpp"
 #include "Vector3D.hpp"
+#include "3DObjects/Object3D.hpp"
+#include "Matrix.hpp"
 
 class CoordinateSystem {
 public:
@@ -26,8 +28,15 @@ public:
 
 //    void drawVectorList(Vector2DGroup vlist);
 
+    void renderObject(const Object3D& object);
+
+    Matrix naberekening(const Matrix& m);
+
     void renderLine(Vector3D &v1, Vector3D &v2);
+
+    void setMultiplyMatrix(Matrix m) { multiplyMatrix = std::make_unique<Matrix>(m); };
 private:
+    std::unique_ptr<Matrix> multiplyMatrix;
     int maxXLineSize = 500;
     int maxYLineSize = 500;
     int minXLineSize = 10;

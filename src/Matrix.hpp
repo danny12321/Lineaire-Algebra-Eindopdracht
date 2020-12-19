@@ -15,7 +15,7 @@ public:
     Matrix(Vector3D &vector);
 //    Matrix(float deg);
 
-    float getNumber(int row, int col) { return matrix[row][col]; }
+    float getNumber(int row, int col) const { return matrix[row][col]; }
     int getRows() { return matrix.size(); }
     void pushOne() { matrix.push_back({1}); }
 

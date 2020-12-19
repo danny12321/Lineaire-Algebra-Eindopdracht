@@ -10,7 +10,6 @@ void CoordinateSystem::drawCoordinateSystem() {
 
     sdlRenderer.setDrawColor(220,220, 220,255);
 
-
     // create x positive lines
     int xPos = xMiddle;
     while(xPos + xLineSize < width + x) {
@@ -85,14 +84,50 @@ void CoordinateSystem::minusXYLineSize(int size) {
     }
 }
 
-//void CoordinateSystem::drawVectorList(Vector2DGroup vgroup) {
-//    sdlRenderer.setDrawColor(255,0,0,0);
-//    for (int i = 0; i < vgroup.getList().size(); ++i) {
-//        if(i == vgroup.getList().size() - 1){
-//            renderLine(vgroup.getList()[i], vgroup.getList()[0]);
-//        } else {
-//            renderLine(vgroup.getList()[i], vgroup.getList()[i+1]);
-//        }
-//    }
-//
-//}
+void CoordinateSystem::renderObject(const Object3D &object) {
+    float screenXHalf = 1280 / 2;
+    float screenYHalf = 720 / 2;
+
+    for(auto line : object.getLines()) {
+        Matrix lineStart {line.start};
+        lineStart.pushOne();
+        Matrix lineEnd {line.end};
+        lineEnd.pushOne();
+
+        Matrix c = naberekening(*multiplyMatrix * lineStart);
+        Matrix d = naberekening(*multiplyMatrix * lineEnd);
+//        Matrix c = *multiplyMatrix * lineStart;
+//        Matrix d = *multiplyMatrix * lineEnd;
+
+        Vector3D pointOne {c.getNumber(0, 0), c.getNumber(1, 0), c.getNumber(2, 0)};
+        Vector3D pointTwo {d.getNumber(0, 0), d.getNumber(1, 0), d.getNumber(2, 0)};
+
+        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(),pointTwo.getX(), pointTwo.getY());
+//        renderLine(pointOne, pointTwo);
+    }
+}
+
+Matrix CoordinateSystem::naberekening(const Matrix& m) {
+    float screenXHalf = 1280 / 2;
+    float screenYHalf = 720 / 2;
+
+    float x = m.getNumber(0,0);
+    float y = m.getNumber(1,0);
+    float z = m.getNumber(2,0);
+    float w = m.getNumber(3,0);
+
+    float xw = x / w;
+    float yw = y / w;
+
+    if(w == 0) {
+        xw = 0;
+        yw = 0;
+    }
+
+    return Matrix {{
+           { screenXHalf + ((xw) * screenXHalf) },
+           { screenYHalf + ((yw) * screenYHalf) },
+           { z },
+           { w }
+   }};
+}

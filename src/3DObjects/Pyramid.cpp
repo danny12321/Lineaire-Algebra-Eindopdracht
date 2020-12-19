@@ -1,19 +1,20 @@
 //
-// Created by Thierry on 18-12-2020.
+// Created by Thierry on 19-12-2020.
 //
 
-#include "Object3D.hpp"
+#include "Pyramid.hpp"
 
-Object3D::Object3D() {
-    // Creates pyramide
-    // Create points
+
+Pyramid::Pyramid() {
+// Creates pyramide
+// Create points
     Vector3D A {0,0,2};
     Vector3D B {0,0,0};
     Vector3D C {2,0,0};
     Vector3D D {2,0,2};
     Vector3D E {1,2,1};
 
-    // Create lines with these points
+// Create lines with these points
     lines.emplace_back(A, B);
     lines.emplace_back(B, C);
     lines.emplace_back(C, D);

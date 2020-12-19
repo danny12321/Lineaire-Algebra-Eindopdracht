@@ -46,8 +46,6 @@ bool SDLRenderer::init() {
         }
     }
 
-//    loadFont("roboto", "../assets/fonts/roboto.ttf");
-
     return success;
 }
 
@@ -62,11 +60,6 @@ void SDLRenderer::close() {
 //    IMG_Quit();
     SDL_Quit();
 //    TTF_Quit();
-}
-
-void SDLRenderer::events() {
-    //Handle events on queue
-
 }
 
 bool SDLRenderer::isRunning() {

@@ -17,6 +17,7 @@ TEST(Camera, GetDirection)
 
 TEST(Camera, GetRight)
 {
+//    Under construction
     // Arrange
     Vector3D eye{1, 1, 1};
     Vector3D lookat{0, 0, 1};

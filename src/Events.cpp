@@ -15,13 +15,14 @@ void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRender
         if(e.type == SDL_MOUSEWHEEL) {
             if (e.wheel.y > 0) // scroll up
             {
-                camera.increaseEye();
 //                coordinateSystem.plusXYLineSize(5);
+                camera.increaseFov();
             } else if (e.wheel.y < 0) // scroll down
             {
-                camera.decreaseEye();
 //                coordinateSystem.minusXYLineSize(5);
+                camera.decreaseFov();
             }
+            std::cout << camera.getFov() << std::endl;
         }
         if(e.type == SDL_MOUSEMOTION)
         {
@@ -29,8 +30,8 @@ void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRender
             int yMouse;
             SDL_GetGlobalMouseState(&xMouse, &yMouse);
 //            std::cout << ((float)xMouse / 1500) << std::endl;
-            camera.setEyeX(((float)xMouse / 1500) * 10);
-            camera.setEyeY(((float)yMouse / 1000) * 10);
+            camera.setEyeX(((float)xMouse / 1500) * 40);
+//            camera.setEyeY(((float)yMouse / 1000) * 40);
 //            coordinateSystem.setMiddleX(xMouse);
 //            coordinateSystem.setMiddleY(yMouse);
         }
