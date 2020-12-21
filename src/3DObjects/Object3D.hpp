@@ -7,6 +7,7 @@
 
 #include "../Line.hpp"
 #include <vector>
+#include "../Matrix.hpp"
 
 class Object3D {
 public:
@@ -15,8 +16,12 @@ public:
     [[nodiscard]] std::vector<Line> getLines() const { return lines; }
     void addLine(const Line& line) { lines.push_back(line); }
 
+    void translate(float x, float y, float z);
+
 protected:
     std::vector<Line> lines;
+private:
+    Matrix vectorToMatrix(const Vector3D& v);
 };
 
 

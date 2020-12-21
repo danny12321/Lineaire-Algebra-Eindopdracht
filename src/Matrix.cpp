@@ -78,6 +78,15 @@ Matrix operator*(const Matrix &a, const Matrix &b) {
     return Matrix {newMatrix};
 }
 
+Matrix Matrix::getTranslationMatrix(float tx, float ty, float tz) {
+    return Matrix {{
+                           { 1, 0, 0, tx },
+                           { 0, 1, 0, ty },
+                           { 0, 0, 1, tz },
+                           { 0, 0, 0, 1 },
+                   }};
+}
+
 Matrix Matrix::getRotationMatrixX(float deg) {
     float PI = std::atan(1.0f) * 4;
     float rad = (deg / 180) * PI;

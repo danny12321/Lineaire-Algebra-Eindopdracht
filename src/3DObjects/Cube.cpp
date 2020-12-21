@@ -9,7 +9,7 @@ Cube::Cube() {
 // Create points
     Vector3D A {0,0,1};
     Vector3D B {0,0,0};
-    Vector3D C {1,0,0};
+    Vector3D C {3,0,0};
     Vector3D D {1,0,1};
     Vector3D E {0,1,1};
     Vector3D F {0,1,0};

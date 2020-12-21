@@ -102,7 +102,7 @@ void CoordinateSystem::renderObject(const Object3D &object) {
         Vector3D pointOne {c.getNumber(0, 0), c.getNumber(1, 0), c.getNumber(2, 0)};
         Vector3D pointTwo {d.getNumber(0, 0), d.getNumber(1, 0), d.getNumber(2, 0)};
 
-        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(),pointTwo.getX(), pointTwo.getY());
+        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(), pointTwo.getX(), pointTwo.getY());
 //        renderLine(pointOne, pointTwo);
     }
 }

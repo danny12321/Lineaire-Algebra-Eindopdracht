@@ -26,7 +26,7 @@ public:
     friend Matrix operator*(const Matrix& a, const Matrix& b);
 //    friend Matrix operator*(const Matrix& a, const Vector2D& b);
 
-//    static Matrix getTranslationMatrix(float tx, float ty, float tz);
+    static Matrix getTranslationMatrix(float tx, float ty, float tz);
     static Matrix getRotationMatrixX(float deg);
     static Matrix getRotationMatrixY(float deg);
     static Matrix getRotationMatrixZ(float deg);
