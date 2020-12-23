@@ -176,21 +176,78 @@ TEST(MatrixTest, Translation)
 
 }
 
-//TEST(MatrixTest, TranslationTwo)
-//{
-//    // Arrange
-//    Matrix a {{
-//                      {1},
-//                      {1},
-//                      {1},
-//                      {1}
-//              }};
-//
-//    // Act
-//    Matrix result = Matrix::getTranslationMatrix(0.1, 0, 0) * a;
-//
-//    // Assert
-//    ASSERT_EQ(result.getNumber(0, 0), 2);
-//    ASSERT_EQ(result.getNumber(1, 0), 1);
-//    ASSERT_EQ(result.getNumber(2, 0), 1);
-//}
+TEST(MatrixTest, RotateM1)
+{
+    Matrix a = {{
+            { 10 },
+            { 8 },
+            { 6 },
+            { 1 }
+    }};
+
+    Matrix m1 = Matrix::getRotationMatrixM1(a);
+
+    Matrix result = m1 * a;
+
+    // Assert
+    EXPECT_TRUE((result.getNumber(0, 0) >= 11.6) && (result.getNumber(0, 0) <= 11.7));
+    ASSERT_EQ(result.getNumber(1, 0), 8);
+    ASSERT_EQ(result.getNumber(2, 0), 0);
+}
+
+TEST(MatrixTest, RotateM1TestTwo)
+{
+    Matrix a = {{
+                        { 0 },
+                        { 8 },
+                        { 6 },
+                        { 1 }
+                }};
+
+    Matrix m1 = Matrix::getRotationMatrixM1(a);
+
+    Matrix result = m1 * a;
+
+    // Assert
+    ASSERT_EQ(result.getNumber(0, 0), 6);
+    ASSERT_EQ(result.getNumber(1, 0), 8);
+    ASSERT_EQ(result.getNumber(2, 0), 0);
+}
+
+TEST(MatrixTest, RotateM2)
+{
+    Matrix a = {{
+                        { 10 },
+                        { 8 },
+                        { 0 },
+                        { 1 }
+                }};
+
+    Matrix m1 = Matrix::getRotationMatrixM2(a);
+
+    Matrix result = m1 * a;
+
+    // Assert
+    EXPECT_TRUE((result.getNumber(0, 0) >= 12.7) && (result.getNumber(0, 0) <= 12.9));
+    EXPECT_TRUE((result.getNumber(1, 0) >= -0.01) && (result.getNumber(1, 0) <= 0.01));
+    ASSERT_EQ(result.getNumber(2, 0), 0);
+}
+
+TEST(MatrixTest, RotateM4)
+{
+    Matrix a = {{
+                        { 10 },
+                        { 8 },
+                        { 0 },
+                        { 1 }
+                }};
+
+    Matrix m1 = Matrix::getRotationMatrixM4(a);
+
+    Matrix result = m1 * a;
+
+    // Assert
+    EXPECT_TRUE((result.getNumber(0, 0) >= 12.7) && (result.getNumber(0, 0) <= 12.9));
+    EXPECT_TRUE((result.getNumber(1, 0) >= -0.01) && (result.getNumber(1, 0) <= 0.01));
+    ASSERT_EQ(result.getNumber(2, 0), 0);
+}

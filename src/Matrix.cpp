@@ -122,3 +122,91 @@ Matrix Matrix::getRotationMatrixZ(float deg) {
                            { 0, 0, 0, 1}
                    }};
 }
+
+Matrix Matrix::getRotationMatrixM1(Matrix m) {
+    float matrixX = m.getNumber(0,0);
+    float matrixZ = m.getNumber(2,0);
+
+    float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
+
+    if(xz == 0.0f){
+        return Matrix {{
+               { 1, 0, 0, 0 },
+               { 0, 1, 0, 0 },
+               { 0, 0, 1, 0 },
+               { 0, 0, 0, 1 }
+       }};
+    } else {
+        return Matrix {{
+               { matrixX / xz, 0, matrixZ / xz, 0 },
+               { 0, 1, 0, 0 },
+               { -matrixZ / xz, 0, matrixX / xz, 0 },
+               { 0, 0, 0, 1 }
+       }};
+    }
+
+}
+
+Matrix Matrix::getRotationMatrixM2(Matrix m) {
+    float matrixX = m.getNumber(0,0);
+    float matrixY = m.getNumber(1,0);
+    float matrixZ = m.getNumber(2,0);
+
+    float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
+    float xyz = std::sqrt((matrixX * matrixX) + (matrixY * matrixY) + (matrixZ * matrixZ));
+
+    return Matrix {{
+                           { xz / xyz, matrixY / xyz, 0, 0 },
+                           { -matrixY / xyz, xz / xyz, 0, 0 },
+                           { 0, 0, 1, 0 },
+                           { 0, 0, 0, 1 }
+                   }};
+}
+
+Matrix Matrix::getRotationMatrixM4(Matrix m) {
+    float matrixX = m.getNumber(0,0);
+    float matrixY = m.getNumber(1,0);
+    float matrixZ = m.getNumber(2,0);
+
+    float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
+    float xyz = std::sqrt((matrixX * matrixX) + (matrixY * matrixY) + (matrixZ * matrixZ));
+
+    return Matrix {{
+                           { xz / xyz, -matrixY / xyz, 0, 0 },
+                           { matrixY / xyz, xz / xyz, 0, 0 },
+                           { 0, 0, 1, 0 },
+                           { 0, 0, 0, 1 }
+                   }};
+}
+
+Matrix Matrix::getRotationMatrixM5(Matrix m) {
+    float matrixX = m.getNumber(0,0);
+    float matrixZ = m.getNumber(2,0);
+
+    float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
+
+    if(xz == 0.0f){
+        return Matrix {{
+                               { 1, 0, 0, 0 },
+                               { 0, 1, 0, 0 },
+                               { 0, 0, 1, 0 },
+                               { 0, 0, 0, 1 }
+                       }};
+    } else {
+        return Matrix {{
+                               { matrixX / xz, 0, -matrixZ / xz, 0 },
+                               { 0, 1, 0, 0 },
+                               { matrixZ / xz, 0, matrixX / xz, 0 },
+                               { 0, 0, 0, 1 }
+                       }};
+    }
+}
+
+Matrix Matrix::getScaleMatrix(float scaleX, float scaleY, float scaleZ) {
+    return Matrix {{
+           { scaleX, 0, 0, 0 },
+           { 0, scaleY, 0, 0 },
+           { 0, 0, scaleZ, 0 },
+           { 0, 0, 0, 1 }
+   }};
+}

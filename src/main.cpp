@@ -16,7 +16,10 @@ int main() {
     Camera camera{eye, lookat};
 
     Cube cube {};
+//    cube.translate(2, 1, 3);
+    cube.scale(3, 3, 3);
     Pyramid pyramid {};
+
 
     if(sdlRenderer.init()) {
         while( !sdlRenderer.isRunning() ) {
@@ -31,7 +34,7 @@ int main() {
 
             sdlRenderer.setDrawColor(255, 0, 0, 255);
 
-            cube.translate(0, 0,0.01);
+            cube.rotateY(1);
             coordinateSystem.renderObject(pyramid);
             sdlRenderer.setDrawColor(0,0,255,255);
             coordinateSystem.renderObject(cube);

@@ -18,11 +18,25 @@ public:
 
     void translate(float x, float y, float z);
 
+    void rotateAroundOriginX(float deg);
+    void rotateAroundOriginY(float deg);
+    void rotateAroundOriginZ(float deg);
+
+    void rotateX(float deg);
+    void rotateY(float deg);
+    void rotateZ(float deg);
+
+    void rotateAxis(const Vector3D& v, float deg);
+
+    void scale(float scaleX, float scaleY, float scaleZ);
+
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
 private:
     Matrix vectorToMatrix(const Vector3D& v);
+    void updatePoints(const Matrix& m);
+    Vector3D getMiddle();
 };
 
 

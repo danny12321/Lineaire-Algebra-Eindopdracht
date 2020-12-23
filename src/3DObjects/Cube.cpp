@@ -15,14 +15,14 @@ Cube::Cube() {
 //    points.push_back(std::make_unique<Vector3D>(1,1,0));
 //    points.push_back(std::make_unique<Vector3D>(1,1,1));
 
-    points.push_back(new Vector3D{0.5,0,1});
-    points.push_back(new Vector3D{0.5,0,0});
-    points.push_back(new Vector3D{1.5,0,0});
-    points.push_back(new Vector3D{1.5,0,1});
-    points.push_back(new Vector3D{0.5,1,1});
-    points.push_back(new Vector3D{0.5,1,0});
-    points.push_back(new Vector3D{1.5,1,0});
-    points.push_back(new Vector3D{1.5,1,1});
+    points.push_back(new Vector3D{0,0,1});
+    points.push_back(new Vector3D{0,0,0});
+    points.push_back(new Vector3D{1,0,0});
+    points.push_back(new Vector3D{1,0,1});
+    points.push_back(new Vector3D{0,1,1});
+    points.push_back(new Vector3D{0,1,0});
+    points.push_back(new Vector3D{1,1,0});
+    points.push_back(new Vector3D{1,1,1});
 
     // Create lines with these points
     lines.push_back(new Line {points[0], points[1]});
