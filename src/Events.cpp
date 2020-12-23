@@ -4,39 +4,29 @@
 
 #include "Events.hpp"
 
-void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRenderer, Camera& camera) {
-    while( SDL_PollEvent( &e ) != 0 )
-    {
+void Events::doEvents(CoordinateSystem &coordinateSystem, SDLRenderer &sdlRenderer, Camera &camera) {
+    while (SDL_PollEvent(&e) != 0) {
+
         //User requests quit
-        if( e.type == SDL_QUIT )
-        {
+        if (e.type == SDL_QUIT) {
             sdlRenderer.quitApp();
         }
-        if(e.type == SDL_MOUSEWHEEL) {
+
+        if (e.type == SDL_MOUSEWHEEL) {
             if (e.wheel.y > 0) // scroll up
-            {
-//                coordinateSystem.plusXYLineSize(5);
                 camera.decreaseFov();
-//                camera.increaseEye();
-            } else if (e.wheel.y < 0) // scroll down
-            {
-//                coordinateSystem.minusXYLineSize(5);
+            else if (e.wheel.y < 0) // scroll down
                 camera.increaseFov();
-//                camera.decreaseEye();
-            }
             std::cout << camera.getFov() << std::endl;
         }
-        if(e.type == SDL_MOUSEMOTION)
-        {
-            int xMouse;
-            int yMouse;
-            SDL_GetGlobalMouseState(&xMouse, &yMouse);
-//            std::cout << ((float)xMouse / 1500) << std::endl;
-            camera.setEyeX((((float)xMouse / 1500) * 40));
-            camera.setEyeY((((float)yMouse / 1000) * 40) - 10);
-//            coordinateSystem.setMiddleX(xMouse);
-//            coordinateSystem.setMiddleY(yMouse);
-        }
 
+        if(e.type == SDL_KEYDOWN) {
+            if(e.key.keysym.sym == SDLK_LEFT) camera.setEyeX(camera.getEye().getX() - .1f);
+            if(e.key.keysym.sym == SDLK_RIGHT) camera.setEyeX(camera.getEye().getX() + .1f);
+            if(e.key.keysym.sym == SDLK_UP) camera.setEyeZ(camera.getEye().getZ() - .1f);
+            if(e.key.keysym.sym == SDLK_DOWN) camera.setEyeZ(camera.getEye().getZ() + .1f);
+            if(e.key.keysym.sym == SDLK_PAGEUP) camera.setEyeY(camera.getEye().getY() + .1f);
+            if(e.key.keysym.sym == SDLK_PAGEDOWN) camera.setEyeY(camera.getEye().getY() - .1f);
+        }
     }
 }
