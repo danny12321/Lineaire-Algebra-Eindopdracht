@@ -6,21 +6,22 @@
 
 
 Pyramid::Pyramid() {
-// Creates pyramide
-// Create points
-    Vector3D A {0,0,2};
-    Vector3D B {0,0,0};
-    Vector3D C {2,0,0};
-    Vector3D D {2,0,2};
-    Vector3D E {1,2,1};
+//// Creates pyramide
+    points.push_back(new Vector3D{0,0,2});
+    points.push_back(new Vector3D{0,0,0});
+    points.push_back(new Vector3D{2,0,0});
+    points.push_back(new Vector3D{2,0,2});
+    points.push_back(new Vector3D{1,2,1});
 
-// Create lines with these points
-    lines.emplace_back(A, B);
-    lines.emplace_back(B, C);
-    lines.emplace_back(C, D);
-    lines.emplace_back(D, A);
-    lines.emplace_back(A, E);
-    lines.emplace_back(B, E);
-    lines.emplace_back(C, E);
-    lines.emplace_back(D, E);
+
+    // Create lines with these points
+    lines.push_back(new Line {points[0], points[1]});
+    lines.push_back(new Line {points[1], points[2]});
+    lines.push_back(new Line {points[2], points[3]});
+    lines.push_back(new Line {points[3], points[0]});
+    lines.push_back(new Line {points[3], points[4]});
+    lines.push_back(new Line {points[2], points[4]});
+    lines.push_back(new Line {points[1], points[4]});
+    lines.push_back(new Line {points[0], points[4]});
+
 }

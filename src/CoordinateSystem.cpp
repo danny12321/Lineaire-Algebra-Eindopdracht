@@ -85,10 +85,11 @@ void CoordinateSystem::minusXYLineSize(int size) {
 }
 
 void CoordinateSystem::renderObject(const Object3D &object) {
+
     for(auto line : object.getLines()) {
-        Matrix lineStart {line.start};
+        Matrix lineStart { *line->start };
         lineStart.pushOne();
-        Matrix lineEnd {line.end};
+        Matrix lineEnd { *line->end };
         lineEnd.pushOne();
 
         Matrix c = naberekening(*multiplyMatrix * lineStart);
@@ -96,36 +97,46 @@ void CoordinateSystem::renderObject(const Object3D &object) {
 //        Matrix c = *multiplyMatrix * lineStart;
 //        Matrix d = *multiplyMatrix * lineEnd;
 
+        if(c.getNumber(3,0) < 0) return;
+        if(d.getNumber(3,0) < 0) return;
+
         Vector3D pointOne {c.getNumber(0, 0), c.getNumber(1, 0), c.getNumber(2, 0)};
         Vector3D pointTwo {d.getNumber(0, 0), d.getNumber(1, 0), d.getNumber(2, 0)};
 
-        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(), pointTwo.getX(), pointTwo.getY());
-//        renderLine(pointOne, pointTwo);
+//        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(), pointTwo.getX(), pointTwo.getY());
+        renderLine(pointOne, pointTwo);
     }
 }
 
 Matrix CoordinateSystem::naberekening(const Matrix& m) {
-    float screenXHalf = sdlRenderer.getScreenWidth() / 2;
-    float screenYHalf = sdlRenderer.getScreenHeight() / 2;
+    float screenXHalf = (float)sdlRenderer.getScreenWidth() / 2;
+    float screenYHalf = (float)sdlRenderer.getScreenHeight() / 2;
+
 
     float x = m.getNumber(0,0);
+    // Ultra comment!
+    // We doen de y-as keer -1 omdat sdl vanuit de linker bovenhoek rekend
+    // en dan is naar benden de plus richting en naar boven de negatieverichting.
+    // Dit willen wij anderzom hebben, daarom doen we de y keer -1.
     float y = m.getNumber(1,0);
     float z = m.getNumber(2,0);
     float w = m.getNumber(3,0);
 
-    float xw = x / w;
-    float yw = y / w;
-    float zw = z / w;
-
-    if(w == 0) {
-        xw = 0;
-        yw = 0;
-    }
+    float xw = (x / w);
+    float yw = (y / w);
+    float zw = (z / w);
 
     return Matrix {{
-           { screenXHalf + (xw / w) },
-           { screenYHalf + (yw / w) },
+           { xw },
+           { yw },
            { zw },
            { 1 }
+   }};
+
+    return Matrix {{
+           { screenXHalf + ((xw / 2) * screenXHalf) },
+           { screenYHalf + ((yw / 2) * screenYHalf) },
+           { zw },
+           { w }
    }};
 }

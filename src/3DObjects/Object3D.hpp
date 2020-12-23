@@ -13,13 +13,14 @@ class Object3D {
 public:
     Object3D();
 
-    [[nodiscard]] std::vector<Line> getLines() const { return lines; }
-    void addLine(const Line& line) { lines.push_back(line); }
+    [[nodiscard]] std::vector<Line*> getLines() const { return lines; }
+    void addLine(Line* line) { lines.push_back(line); }
 
     void translate(float x, float y, float z);
 
 protected:
-    std::vector<Line> lines;
+    std::vector<Line*> lines;
+    std::vector<Vector3D*> points;
 private:
     Matrix vectorToMatrix(const Vector3D& v);
 };

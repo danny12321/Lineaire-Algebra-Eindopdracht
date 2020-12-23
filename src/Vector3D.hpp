@@ -32,7 +32,7 @@ public:
 
     void setX(float x) { this->x = x; };
     void setY(float y) { this->y = y; };
-    void setZ(float z) { this->y = z; };
+    void setZ(float z) { this->z = z; };
 
 //    Matrix getMatrix1x2();
 //    Matrix getMatrix1x3();

@@ -9,9 +9,9 @@
 
 class Line {
 public:
-    Line(Vector3D start, Vector3D end) : start(start), end(end) {};
-    Vector3D start;
-    Vector3D end;
+    Line(Vector3D* start, Vector3D* end) : start(start), end(end) {};
+    Vector3D* start;
+    Vector3D* end;
 private:
 };
 

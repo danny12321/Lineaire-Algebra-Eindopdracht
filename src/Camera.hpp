@@ -35,7 +35,7 @@ public:
 private:
     Vector3D eye;
     Vector3D lookat;
-    float near = 0.1;
+    float near = 0.1f;
     float far = 100;
     float fovy = 60;
 };

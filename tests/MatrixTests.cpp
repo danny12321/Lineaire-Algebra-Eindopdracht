@@ -155,3 +155,42 @@ TEST(MatrixTest, MultiplyMatricesWithDifferentRowAndColumnsThrowsError)
         FAIL() << "Expected: Matrix size is not correct for multiplying";
     }
 }
+
+TEST(MatrixTest, Translation)
+{
+    // Arrange
+    Matrix a {{
+              {1},
+              {3},
+              {5},
+              {1}
+      }};
+
+    // Act
+    Matrix result = Matrix::getTranslationMatrix(2, 1, 3) * a;
+
+    // Assert
+    ASSERT_EQ(result.getNumber(0, 0), 3);
+    ASSERT_EQ(result.getNumber(1, 0), 4);
+    ASSERT_EQ(result.getNumber(2, 0), 8);
+
+}
+
+//TEST(MatrixTest, TranslationTwo)
+//{
+//    // Arrange
+//    Matrix a {{
+//                      {1},
+//                      {1},
+//                      {1},
+//                      {1}
+//              }};
+//
+//    // Act
+//    Matrix result = Matrix::getTranslationMatrix(0.1, 0, 0) * a;
+//
+//    // Assert
+//    ASSERT_EQ(result.getNumber(0, 0), 2);
+//    ASSERT_EQ(result.getNumber(1, 0), 1);
+//    ASSERT_EQ(result.getNumber(2, 0), 1);
+//}

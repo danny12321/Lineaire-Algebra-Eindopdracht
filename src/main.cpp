@@ -11,10 +11,9 @@ int main() {
     CoordinateSystem coordinateSystem {sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1};
     Events events;
 
-    Vector3D eye{20, 20, 20};
+    Vector3D eye{5, 5, 5};
     Vector3D lookat{0, 0, 0};
     Camera camera{eye, lookat};
-
 
     Cube cube {};
     Pyramid pyramid {};
@@ -26,17 +25,17 @@ int main() {
 
             events.doEvents(coordinateSystem, sdlRenderer, camera);
 
-            Matrix multiplyMatrix = camera.getProjectionMatrix() * camera.getToOriginMatrix();
+            Matrix multiplyMatrix =  camera.getProjectionMatrix() *camera.getToOriginMatrix();
 
             coordinateSystem.setMultiplyMatrix(multiplyMatrix);
 
             sdlRenderer.setDrawColor(255, 0, 0, 255);
 
+            cube.translate(0, 0,0.01);
             coordinateSystem.renderObject(pyramid);
             sdlRenderer.setDrawColor(0,0,255,255);
             coordinateSystem.renderObject(cube);
 
-//            cube.translate(0.01, 0,0);
 
             sdlRenderer.setDrawColor(255, 255, 255, 255);
 

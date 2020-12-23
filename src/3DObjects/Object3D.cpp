@@ -11,17 +11,14 @@ Object3D::Object3D() {
 
 void Object3D::translate(float x, float y, float z) {
     Matrix translation = Matrix::getTranslationMatrix(x, y, z);
-    for (auto& line : lines) {
-        Matrix start = translation * vectorToMatrix(line.start);
-        Matrix end = translation * vectorToMatrix(line.end);
+    for (auto* point : points) {
+//        point->setX(point->getX() + 0.1f);
+        auto a = vectorToMatrix(*point);
+        Matrix pointMatrix = translation * vectorToMatrix(*point);
 
-        line.start.setX(start.getNumber(0,0));
-        line.start.setY(start.getNumber(1,0));
-        line.start.setZ(start.getNumber(2,0));
-
-        line.end.setX(end.getNumber(0,0));
-        line.end.setY(end.getNumber(1,0));
-        line.end.setZ(end.getNumber(2,0));
+        point->setX(pointMatrix.getNumber(0,0));
+        point->setY(pointMatrix.getNumber(1,0));
+        point->setZ(pointMatrix.getNumber(2,0));
     }
 }
 
