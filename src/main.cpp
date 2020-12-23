@@ -36,7 +36,7 @@ int main() {
             sdlRenderer.setDrawColor(0,0,255,255);
             coordinateSystem.renderObject(cube);
 
-            cube.translate(0.01, 0,0);
+//            cube.translate(0.01, 0,0);
 
             sdlRenderer.setDrawColor(255, 255, 255, 255);
 

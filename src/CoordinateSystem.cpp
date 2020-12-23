@@ -85,9 +85,6 @@ void CoordinateSystem::minusXYLineSize(int size) {
 }
 
 void CoordinateSystem::renderObject(const Object3D &object) {
-    float screenXHalf = 1280 / 2;
-    float screenYHalf = 720 / 2;
-
     for(auto line : object.getLines()) {
         Matrix lineStart {line.start};
         lineStart.pushOne();
@@ -108,8 +105,8 @@ void CoordinateSystem::renderObject(const Object3D &object) {
 }
 
 Matrix CoordinateSystem::naberekening(const Matrix& m) {
-    float screenXHalf = 1280 / 2;
-    float screenYHalf = 720 / 2;
+    float screenXHalf = sdlRenderer.getScreenWidth() / 2;
+    float screenYHalf = sdlRenderer.getScreenHeight() / 2;
 
     float x = m.getNumber(0,0);
     float y = m.getNumber(1,0);
@@ -118,6 +115,7 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
 
     float xw = x / w;
     float yw = y / w;
+    float zw = z / w;
 
     if(w == 0) {
         xw = 0;
@@ -125,9 +123,9 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
     }
 
     return Matrix {{
-           { screenXHalf + ((xw) * screenXHalf) },
-           { screenYHalf + ((yw) * screenYHalf) },
-           { z },
-           { w }
+           { screenXHalf + (xw / w) },
+           { screenYHalf + (yw / w) },
+           { zw },
+           { 1 }
    }};
 }

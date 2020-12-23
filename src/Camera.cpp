@@ -46,7 +46,11 @@ Matrix Camera::getToOriginMatrix() {
 }
 
 Matrix Camera::getProjectionMatrix() {
-    float scale = near * tan(fovy * 0.5f);
+    float PI = std::atan(1.0f) * 4;
+//    float rad = (fovy / 180) * PI;
+//    float scale = near * tan(fovy * 0.5f);
+float scale = 1 / (tan((fovy/ 2) * (PI / 180)));
+
     return Matrix {{
            { scale, 0, 0, 0 },
            { 0, scale, 0, 0 },

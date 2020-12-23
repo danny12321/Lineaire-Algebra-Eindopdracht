@@ -27,7 +27,7 @@ bool SDLRenderer::init() {
         }
 
         //Create window
-        window = SDL_CreateWindow( "Linal", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+        window = SDL_CreateWindow( "Linal", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
         if( window == NULL )
         {
             printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -67,6 +67,7 @@ bool SDLRenderer::isRunning() {
 }
 
 void SDLRenderer::clearScreen() {
+    SDL_GetRendererOutputSize(renderer, &SCREEN_WIDTH, &SCREEN_HEIGHT);
 
     SDL_RenderClear( renderer );
 }

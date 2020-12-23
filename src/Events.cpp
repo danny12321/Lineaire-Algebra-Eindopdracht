@@ -16,12 +16,12 @@ void Events::doEvents(CoordinateSystem& coordinateSystem, SDLRenderer& sdlRender
             if (e.wheel.y > 0) // scroll up
             {
 //                coordinateSystem.plusXYLineSize(5);
-                camera.increaseFov();
+                camera.decreaseFov();
 //                camera.increaseEye();
             } else if (e.wheel.y < 0) // scroll down
             {
 //                coordinateSystem.minusXYLineSize(5);
-                camera.decreaseFov();
+                camera.increaseFov();
 //                camera.decreaseEye();
             }
             std::cout << camera.getFov() << std::endl;

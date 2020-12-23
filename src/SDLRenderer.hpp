@@ -35,8 +35,8 @@ public:
 
     void quitApp() { quit = true; }
 private:
-    const int SCREEN_WIDTH = 1280;
-    const int SCREEN_HEIGHT = 720;
+    int SCREEN_WIDTH = 1280;
+    int SCREEN_HEIGHT = 720;
 
     const int fps = 100;
     const int waitingTimeForFrame = 1000 / fps;
