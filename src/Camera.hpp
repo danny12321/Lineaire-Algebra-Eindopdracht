@@ -13,25 +13,35 @@ public:
     Camera(Vector3D eye, Vector3D lookat) : eye(eye), lookat(lookat) {};
 
     Vector3D getDirection();
+
     Vector3D getRight();
+
     Vector3D getUp();
+
     Matrix getRotationMatrix();
+
     Matrix getTranslationMatrix();
+
     Matrix getToOriginMatrix();
+
     Matrix getProjectionMatrix();
-    Matrix naberekening(const Matrix& m);
 
-    void increaseEye() {eye.setX(eye.getX() + 0.1f);}
-    void decreaseEye() {eye.setX(eye.getX() - 0.1f);}
+    Matrix naberekening(const Matrix &m);
 
-    void increaseFov() { fovy += 1; }
-    void decreaseFov() { fovy -= 1; }
+    void increaseFov() { if (fovy < 179) fovy += 1; }
 
-    float getFov() {return fovy;}
+    void decreaseFov() { if (fovy > 1) fovy -= 1; }
 
-    void setEyeX(float x) {eye.setX(x);}
-    void setEyeY(float y) {eye.setY(y);}
-    void setEyeZ(float z) {eye.setZ(z);}
+    float getFov() { return fovy; }
+
+    void setEyeX(float x) { eye.setX(x); }
+
+    void setEyeY(float y) { eye.setY(y); }
+
+    void setEyeZ(float z) { eye.setZ(z); }
+
+    [[nodiscard]] Vector3D getEye() const { return eye; };
+
 private:
     Vector3D eye;
     Vector3D lookat;
