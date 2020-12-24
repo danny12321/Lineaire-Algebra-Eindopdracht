@@ -12,6 +12,7 @@
 class Object3D {
 public:
     Object3D();
+    Object3D(const std::string &filename);
 
     [[nodiscard]] std::vector<Line*> getLines() const { return lines; }
     void addLine(Line* line) { lines.push_back(line); }
@@ -39,6 +40,8 @@ public:
     [[nodiscard]] int getRedColor() const {return r;};
     [[nodiscard]] int getGreenColor() const {return g;};
     [[nodiscard]] int getBlueColor() const {return b;};
+
+    virtual void event() {};
 
 protected:
     std::vector<Line*> lines;

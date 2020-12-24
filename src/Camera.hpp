@@ -45,6 +45,9 @@ public:
     void rotateCameraY(float deg);
     void rotateCameraZ(float deg);
 
+    void rotateCameraRelativeY(float deg);
+    void rotateCameraRelativeZ(float deg);
+
     void translateRelative(float x, float y, float z);
 
 private:

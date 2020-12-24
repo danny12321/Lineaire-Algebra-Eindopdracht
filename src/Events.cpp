@@ -31,12 +31,16 @@ void Events::doEvents(CoordinateSystem &coordinateSystem, SDLRenderer &sdlRender
             if(e.key.keysym.sym == SDLK_DOWN) camera.setEyeZ(camera.getEye().getZ() + .1f);
             if(e.key.keysym.sym == SDLK_PAGEUP) camera.setEyeY(camera.getEye().getY() + .1f);
             if(e.key.keysym.sym == SDLK_PAGEDOWN) camera.setEyeY(camera.getEye().getY() - .1f);
-            if(e.key.keysym.sym == SDLK_w) camera.translateRelative(-.1, 0, 0);
-            if(e.key.keysym.sym == SDLK_s) camera.translateRelative(.1, 0, 0);
-            if(e.key.keysym.sym == SDLK_a) camera.translateRelative(0, 0, .1);
-            if(e.key.keysym.sym == SDLK_d) camera.translateRelative(0, 0, -.1);
-            if(e.key.keysym.sym == SDLK_LSHIFT) camera.translateRelative(0, -0.1, 0);
-            if(e.key.keysym.sym == SDLK_SPACE) camera.translateRelative(0, 0.1, 0);
+            if(e.key.keysym.sym == SDLK_w) camera.translateRelative(-1, 0, 0);
+            if(e.key.keysym.sym == SDLK_s) camera.translateRelative(1, 0, 0);
+            if(e.key.keysym.sym == SDLK_a) camera.translateRelative(0, 0, 1);
+            if(e.key.keysym.sym == SDLK_d) camera.translateRelative(0, 0, -1);
+            if(e.key.keysym.sym == SDLK_LSHIFT) camera.translateRelative(0, -1, 0);
+            if(e.key.keysym.sym == SDLK_SPACE) camera.translateRelative(0, 1, 0);
+            if(e.key.keysym.sym == SDLK_q) camera.rotateCameraY(-1);
+            if(e.key.keysym.sym == SDLK_e) camera.rotateCameraY(1);
+            if(e.key.keysym.sym == SDLK_r) camera.rotateCameraZ(1);
+            if(e.key.keysym.sym == SDLK_f) camera.rotateCameraZ(-1);
         }
     }
 }

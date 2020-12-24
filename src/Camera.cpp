@@ -60,15 +60,8 @@ Matrix Camera::getProjectionMatrix() {
 }
 
 void Camera::rotateCameraZ(float deg) {
-    deg = (180.f / 720) * deg;
-
     Matrix eyeMatrix {eye};
     eyeMatrix.pushOne();
-
-    float activeDeg = eyeMatrix.getAngleZ();
-    deg = deg - activeDeg;
-
-    std::cout << activeDeg << std::endl;
 
     Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
     Matrix rotation = Matrix::getRotationMatrixZ(deg);
@@ -81,7 +74,19 @@ void Camera::rotateCameraZ(float deg) {
 }
 
 void Camera::rotateCameraY(float deg) {
+    Matrix eyeMatrix {eye};
+    eyeMatrix.pushOne();
 
+    Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
+    Matrix m2 = Matrix::getRotationMatrixM2(eyeMatrix);
+    Matrix rotation = Matrix::getRotationMatrixY(deg);
+    Matrix m4 = Matrix::getRotationMatrixM4(eyeMatrix);
+    Matrix m5 = Matrix::getRotationMatrixM5(eyeMatrix);
+    Matrix result = (m5 * m4 * rotation * m2 * m1) * eyeMatrix;
+
+    eye.setX(result.getNumber(0,0));
+    eye.setY(result.getNumber(1,0));
+    eye.setZ(result.getNumber(2,0));
 }
 
 void Camera::translateRelative(float x, float y, float z) {
@@ -108,6 +113,31 @@ void Camera::translateRelative(float x, float y, float z) {
     lookat.setX(lresult.getNumber(0,0));
     lookat.setY(lresult.getNumber(1,0));
     lookat.setZ(lresult.getNumber(2,0));
+}
+
+void Camera::rotateCameraRelativeY(float deg) {
+//    Matrix lookatMatrix {lookat};
+//    lookatMatrix.pushOne();
+//
+//    Matrix eyeMatrix {eye};
+//    eyeMatrix.pushOne();
+//
+//    Matrix translationToOrigin = Matrix::getTranslationMatrix(eye.getX(), eye.getY(), eye.getZ());
+//    Matrix m1 = Matrix::getRotationMatrixM1(lookatMatrix);
+//    Matrix m2 = Matrix::getRotationMatrixM2(lookatMatrix);
+//    Matrix rotation = Matrix::getRotationMatrixY(deg);
+//    Matrix m4 = Matrix::getRotationMatrixM4(lookatMatrix);
+//    Matrix m5 = Matrix::getRotationMatrixM5(lookatMatrix);
+//    Matrix translationBack = Matrix::getTranslationMatrix(-eye.getX(), -eye.getY(), -eye.getZ());
+//    Matrix result = (translationBack * m5 * m4 * rotation * m2 * m1 * translationToOrigin) * lookatMatrix;
+//
+//    lookat.setX(result.getNumber(0,0));
+//    lookat.setY(result.getNumber(1,0));
+//    lookat.setZ(result.getNumber(2,0));
+}
+
+void Camera::rotateCameraRelativeZ(float deg) {
+
 }
 
 
