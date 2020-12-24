@@ -30,6 +30,16 @@ public:
 
     void scale(float scaleX, float scaleY, float scaleZ);
 
+    void setColor(int r, int g, int b) {
+        this->r = r;
+        this->g = g;
+        this->b = b;
+    }
+
+    [[nodiscard]] int getRedColor() const {return r;};
+    [[nodiscard]] int getGreenColor() const {return g;};
+    [[nodiscard]] int getBlueColor() const {return b;};
+
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
@@ -37,6 +47,9 @@ private:
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);
     Vector3D getMiddle();
+    int r= 255;
+    int g= 255;
+    int b =255;
 };
 
 

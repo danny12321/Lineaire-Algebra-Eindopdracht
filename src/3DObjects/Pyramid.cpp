@@ -6,6 +6,8 @@
 
 
 Pyramid::Pyramid() {
+    this->setColor(220, 197, 155);
+
 //// Creates pyramide
     points.push_back(new Vector3D{0,0,2});
     points.push_back(new Vector3D{0,0,0});

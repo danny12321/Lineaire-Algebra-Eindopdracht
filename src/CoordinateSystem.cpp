@@ -85,6 +85,7 @@ void CoordinateSystem::minusXYLineSize(int size) {
 }
 
 void CoordinateSystem::renderObject(const Object3D &object) {
+    sdlRenderer.setDrawColor(object.getRedColor(), object.getGreenColor(), object.getBlueColor(), 255);
 
     for(auto line : object.getLines()) {
         Matrix lineStart { *line->start };
