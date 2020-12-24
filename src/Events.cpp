@@ -21,12 +21,12 @@ void Events::doEvents(CoordinateSystem &coordinateSystem, SDLRenderer &sdlRender
         }
 
         if(e.type == SDL_KEYDOWN) {
-            if(e.key.keysym.sym == SDLK_LEFT) camera.setEyeX(camera.getEye().getX() - .1f);
-            if(e.key.keysym.sym == SDLK_RIGHT) camera.setEyeX(camera.getEye().getX() + .1f);
-            if(e.key.keysym.sym == SDLK_UP) camera.setEyeZ(camera.getEye().getZ() - .1f);
-            if(e.key.keysym.sym == SDLK_DOWN) camera.setEyeZ(camera.getEye().getZ() + .1f);
-            if(e.key.keysym.sym == SDLK_PAGEUP) camera.setEyeY(camera.getEye().getY() + .1f);
-            if(e.key.keysym.sym == SDLK_PAGEDOWN) camera.setEyeY(camera.getEye().getY() - .1f);
+            if(e.key.keysym.sym == SDLK_LEFT) camera.setEyeX(camera.getEye().getX() - 1);
+            if(e.key.keysym.sym == SDLK_RIGHT) camera.setEyeX(camera.getEye().getX() + 1);
+            if(e.key.keysym.sym == SDLK_UP) camera.setEyeZ(camera.getEye().getZ() - 1);
+            if(e.key.keysym.sym == SDLK_DOWN) camera.setEyeZ(camera.getEye().getZ() + 1);
+            if(e.key.keysym.sym == SDLK_PAGEUP) camera.setEyeY(camera.getEye().getY() + 1);
+            if(e.key.keysym.sym == SDLK_PAGEDOWN) camera.setEyeY(camera.getEye().getY() - 1);
         }
     }
 }

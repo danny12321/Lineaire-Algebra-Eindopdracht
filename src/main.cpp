@@ -5,20 +5,21 @@
 #include "Events.hpp"
 #include "3DObjects/Pyramid.hpp"
 #include "3DObjects/Cube.hpp"
+#include "3DObjects/JsonObject3D.hpp"
 
 int main() {
     SDLRenderer sdlRenderer;
     CoordinateSystem coordinateSystem {sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1};
     Events events;
 
-    Vector3D eye{5, 5, 5};
+    Vector3D eye{200, 100, 200};
     Vector3D lookat{0, 0, 0};
     Camera camera{eye, lookat};
 
-    Cube cube {};
-//    cube.translate(2, 1, 3);
-    cube.scale(3, 3, 3);
-    Pyramid pyramid {};
+    JsonObject3D spaceship {"saturn"};
+    JsonObject3D jezus {"jezus"};
+    jezus.rotateX(-90);
+    spaceship.rotateX(180);
 
 
     if(sdlRenderer.init()) {
@@ -32,13 +33,12 @@ int main() {
 
             coordinateSystem.setMultiplyMatrix(multiplyMatrix);
 
-            sdlRenderer.setDrawColor(255, 0, 0, 255);
-
-            cube.rotateY(1);
-            coordinateSystem.renderObject(pyramid);
             sdlRenderer.setDrawColor(0,0,255,255);
-            coordinateSystem.renderObject(cube);
+            coordinateSystem.renderObject(spaceship);
 
+            sdlRenderer.setDrawColor(255,0,0,255);
+
+            coordinateSystem.renderObject(jezus);
 
             sdlRenderer.setDrawColor(255, 255, 255, 255);
 

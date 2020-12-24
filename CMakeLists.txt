@@ -16,3 +16,5 @@ add_executable(Tests ${TEST_SOURCES})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${CONAN_LIBS})
 target_link_libraries(Tests ${CONAN_LIBS})
+
+file(COPY resources DESTINATION ${CMAKE_BINARY_DIR}/bin)
