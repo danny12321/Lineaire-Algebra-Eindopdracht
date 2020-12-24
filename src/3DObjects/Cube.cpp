@@ -14,6 +14,7 @@ Cube::Cube() {
 //    points.push_back(std::make_unique<Vector3D>(0,1,0));
 //    points.push_back(std::make_unique<Vector3D>(1,1,0));
 //    points.push_back(std::make_unique<Vector3D>(1,1,1));
+    this->setColor(0,0,255);
 
     points.push_back(new Vector3D{0,0,1});
     points.push_back(new Vector3D{0,0,0});

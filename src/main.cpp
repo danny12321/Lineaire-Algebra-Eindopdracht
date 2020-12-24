@@ -33,15 +33,10 @@ int main() {
 
             coordinateSystem.setMultiplyMatrix(multiplyMatrix);
 
-            sdlRenderer.setDrawColor(0,0,255,255);
             coordinateSystem.renderObject(spaceship);
-
-            sdlRenderer.setDrawColor(255,0,0,255);
-
             coordinateSystem.renderObject(jezus);
 
             sdlRenderer.setDrawColor(255, 255, 255, 255);
-
             sdlRenderer.render();
 
             sdlRenderer.delay();
