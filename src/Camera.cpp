@@ -9,7 +9,7 @@ Vector3D Camera::getDirection() {
 }
 
 Vector3D Camera::getRight() {
-    Vector3D fakeUp {0,1,0};
+    Vector3D fakeUp{0, 1, 0};
     Vector3D dir = this->getDirection();
     auto cross = fakeUp.crossProduct(dir);
     return (fakeUp.crossProduct(dir)).getEenheidsvector();
@@ -25,20 +25,20 @@ Matrix Camera::getRotationMatrix() {
     Vector3D up = this->getUp();
 
     return Matrix{{
-          { right.getX(), right.getY(), right.getZ(), 0 },
-          { up.getX(), up.getY(), up.getZ(), 0 },
-          { dir.getX(), dir.getY(), dir.getZ(), 0 },
-          { 0, 0, 0, 1 }
-    }};
+                          {right.getX(), right.getY(), right.getZ(), 0},
+                          {up.getX(), up.getY(), up.getZ(), 0},
+                          {dir.getX(), dir.getY(), dir.getZ(), 0},
+                          {0, 0, 0, 1}
+                  }};
 }
 
 Matrix Camera::getTranslationMatrix() {
     return Matrix{{
-          { 1, 0, 0, -eye.getX() },
-          { 0, 1, 0, -eye.getY() },
-          { 0, 0, 1, -eye.getZ() },
-          { 0, 0, 0, 1 },
-    }};
+                          {1, 0, 0, -eye.getX()},
+                          {0, 1, 0, -eye.getY()},
+                          {0, 0, 1, -eye.getZ()},
+                          {0, 0, 0, 1},
+                  }};
 }
 
 Matrix Camera::getToOriginMatrix() {
@@ -49,18 +49,18 @@ Matrix Camera::getProjectionMatrix() {
     float PI = std::atan(1.0f) * 4;
     //    float rad = (fovy / 180) * PI;
     //    float scale = near * tan(fovy * 0.5f);
-    float scale = 1 / (tan((fovy/ 2) * (PI / 180)));
+    float scale = 1 / (tan((fovy / 2) * (PI / 180)));
 
-    return Matrix {{
-           { scale, 0, 0, 0 },
-           { 0, scale, 0, 0 },
-           { 0, 0, -far / (far - near), -1 },
-           { 0, 0, (-far * near) / (far - near), 0 }
-    }};
+    return Matrix{{
+                          {scale, 0, 0, 0},
+                          {0, scale, 0, 0},
+                          {0, 0, -far / (far - near), -1},
+                          {0, 0, (-far * near) / (far - near), 0}
+                  }};
 }
 
 void Camera::rotateCameraZ(float deg) {
-    Matrix eyeMatrix {eye};
+    Matrix eyeMatrix{eye};
     eyeMatrix.pushOne();
 
     Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
@@ -68,13 +68,13 @@ void Camera::rotateCameraZ(float deg) {
     Matrix m5 = Matrix::getRotationMatrixM5(eyeMatrix);
     Matrix result = (m5 * rotation * m1) * eyeMatrix;
 
-    eye.setX(result.getNumber(0,0));
-    eye.setY(result.getNumber(1,0));
-    eye.setZ(result.getNumber(2,0));
+    eye.setX(result.getNumber(0, 0));
+    eye.setY(result.getNumber(1, 0));
+    eye.setZ(result.getNumber(2, 0));
 }
 
 void Camera::rotateCameraY(float deg) {
-    Matrix eyeMatrix {eye};
+    Matrix eyeMatrix{eye};
     eyeMatrix.pushOne();
 
     Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
@@ -84,16 +84,16 @@ void Camera::rotateCameraY(float deg) {
     Matrix m5 = Matrix::getRotationMatrixM5(eyeMatrix);
     Matrix result = (m5 * m4 * rotation * m2 * m1) * eyeMatrix;
 
-    eye.setX(result.getNumber(0,0));
-    eye.setY(result.getNumber(1,0));
-    eye.setZ(result.getNumber(2,0));
+    eye.setX(result.getNumber(0, 0));
+    eye.setY(result.getNumber(1, 0));
+    eye.setZ(result.getNumber(2, 0));
 }
 
 void Camera::translateRelative(float x, float y, float z) {
-    Matrix eyeMatrix {eye};
+    Matrix eyeMatrix{eye};
     eyeMatrix.pushOne();
 
-    Matrix lookatMatrix {lookat};
+    Matrix lookatMatrix{lookat};
     lookatMatrix.pushOne();
 
     Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
@@ -106,13 +106,13 @@ void Camera::translateRelative(float x, float y, float z) {
     Matrix l5 = Matrix::getRotationMatrixM5(lookatMatrix);
     Matrix lresult = (m5 * ltranslation * m1) * lookatMatrix;
 
-    eye.setX(result.getNumber(0,0));
-    eye.setY(result.getNumber(1,0));
-    eye.setZ(result.getNumber(2,0));
+    eye.setX(result.getNumber(0, 0));
+    eye.setY(result.getNumber(1, 0));
+    eye.setZ(result.getNumber(2, 0));
 
-    lookat.setX(lresult.getNumber(0,0));
-    lookat.setY(lresult.getNumber(1,0));
-    lookat.setZ(lresult.getNumber(2,0));
+    lookat.setX(lresult.getNumber(0, 0));
+    lookat.setY(lresult.getNumber(1, 0));
+    lookat.setZ(lresult.getNumber(2, 0));
 }
 
 void Camera::rotateCameraRelativeY(float deg) {
@@ -140,4 +140,25 @@ void Camera::rotateCameraRelativeZ(float deg) {
 
 }
 
+void Camera::handleEvents(const EventSystem &system) {
+    if (system.keyIsPressed(SDLK_HOME)) fovy -= 1;
+    if (system.keyIsPressed(SDLK_END)) fovy += 1;
 
+
+    if (system.keyIsPressed(SDLK_LEFT)) setEyeX(eye.getX() - .1f);
+    if (system.keyIsPressed(SDLK_RIGHT)) setEyeX(eye.getX() + .1f);
+    if (system.keyIsPressed(SDLK_UP)) setEyeZ(eye.getZ() - .1f);
+    if (system.keyIsPressed(SDLK_DOWN)) setEyeZ(eye.getZ() + .1f);
+    if (system.keyIsPressed(SDLK_PAGEUP)) setEyeY(eye.getY() + .1f);
+    if (system.keyIsPressed(SDLK_PAGEDOWN)) setEyeY(eye.getY() - .1f);
+//    if (system.keyIsPressed(SDLK_w)) translateRelative(-1, 0, 0);
+//    if (system.keyIsPressed(SDLK_s)) translateRelative(1, 0, 0);
+//    if (system.keyIsPressed(SDLK_a)) translateRelative(0, 0, 1);
+//    if (system.keyIsPressed(SDLK_d)) translateRelative(0, 0, -1);
+    if (system.keyIsPressed(SDLK_LSHIFT)) translateRelative(0, -1, 0);
+//    if (system.keyIsPressed(SDLK_SPACE)) translateRelative(0, 1, 0);
+//    if (system.keyIsPressed(SDLK_q)) rotateCameraY(-1);
+//    if (system.keyIsPressed(SDLK_e)) rotateCameraY(1);
+    if (system.keyIsPressed(SDLK_r)) rotateCameraZ(1);
+    if (system.keyIsPressed(SDLK_f)) rotateCameraZ(-1);
+}

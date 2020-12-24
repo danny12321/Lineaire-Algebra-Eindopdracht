@@ -12,7 +12,6 @@ class Jezus : public Object3D {
 public:
     Jezus();
 
-    void event() override;
 };
 
 

@@ -2,6 +2,6 @@
 
 int main() {
     Space space {};
-    space.Run();
+    space.run();
     return 0;
 }

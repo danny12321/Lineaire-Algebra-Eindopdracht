@@ -9,23 +9,30 @@
 #include "3DObjects/Object3D.hpp"
 #include "SDLRenderer.hpp"
 #include "CoordinateSystem.hpp"
-#include "Events.hpp"
+#include "EventSystem.hpp"
+#include "Camera.hpp";
 
 class Space {
 public:
     Space();
-    void Run();
+
     ~Space();
+
+    void run();
+
+    void update();
 
 private:
     void render();
 
-    std::vector<Object3D> objects;
+    std::vector<std::unique_ptr<Object3D>> objects;
     SDLRenderer sdlRenderer;
     CoordinateSystem coordinateSystem;
-    Events events;
+    EventSystem eventSystem;
 
     Camera camera;
+
+    void handleEvents();
 };
 
 

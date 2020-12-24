@@ -43,14 +43,13 @@ Matrix Object3D::vectorToMatrix(const Vector3D &v) {
 }
 
 
-
 void Object3D::updatePoints(const Matrix &m) {
-    for (auto* point : points) {
+    for (auto *point : points) {
         Matrix pointMatrix = m * vectorToMatrix(*point);
 
-        point->setX(pointMatrix.getNumber(0,0));
-        point->setY(pointMatrix.getNumber(1,0));
-        point->setZ(pointMatrix.getNumber(2,0));
+        point->setX(pointMatrix.getNumber(0, 0));
+        point->setY(pointMatrix.getNumber(1, 0));
+        point->setZ(pointMatrix.getNumber(2, 0));
     }
 }
 
@@ -85,19 +84,18 @@ void Object3D::rotateZ(float deg) {
 }
 
 
-
 Vector3D Object3D::getMiddle() {
     float x = 0;
     float y = 0;
     float z = 0;
 
-    for(auto& point : points) {
+    for (auto &point : points) {
         x += point->getX();
         y += point->getY();
         z += point->getZ();
     }
 
-    return Vector3D {x / points.size(), y / points.size(), z / points.size() };
+    return Vector3D{x / points.size(), y / points.size(), z / points.size()};
 }
 
 void Object3D::rotateAxis(const Vector3D &v, float deg) {
@@ -144,7 +142,9 @@ Object3D::Object3D(const std::string &filename) {
                 lines.push_back(new Line{points[points_used - i], points[points_used - i - 1]});
             }
 
-            lines.push_back(new Line{points[points_used - 1], points[points_used - row["verts"].size()]});
+            if (row["verts"].size() != 0) {
+                lines.push_back(new Line{points[points_used - 1], points[points_used - row["verts"].size()]});
+            }
         }
     } catch (const std::exception &e) {
         std::cout << e.what() << std::endl;

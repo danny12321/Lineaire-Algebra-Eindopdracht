@@ -7,6 +7,7 @@
 
 #include "Matrix.hpp"
 #include "Vector3D.hpp"
+#include "EventSystem.hpp"
 
 class Camera {
 public:
@@ -49,6 +50,8 @@ public:
     void rotateCameraRelativeZ(float deg);
 
     void translateRelative(float x, float y, float z);
+
+    void handleEvents(const EventSystem &system);
 
 private:
     Vector3D eye;
