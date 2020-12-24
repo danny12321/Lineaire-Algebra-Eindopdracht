@@ -150,3 +150,9 @@ Object3D::Object3D(const std::string &filename) {
         std::cout << e.what() << std::endl;
     }
 }
+
+void Object3D::toOrigin() {
+    Vector3D middle = getMiddle();
+    Matrix result = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
+    updatePoints(result);
+}

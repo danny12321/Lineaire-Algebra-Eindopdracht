@@ -43,6 +43,8 @@ public:
 
     virtual void event() {};
 
+    void toOrigin();
+
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
