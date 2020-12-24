@@ -210,3 +210,24 @@ Matrix Matrix::getScaleMatrix(float scaleX, float scaleY, float scaleZ) {
            { 0, 0, 0, 1 }
    }};
 }
+
+float Matrix::getAngleX() {
+    return 0;
+}
+
+float Matrix::getAngleY() {
+    return 0;
+}
+
+// Werkt niet
+float Matrix::getAngleZ() {
+    float x = getNumber(0,0);
+    float y = getNumber(1,0);
+    float z = getNumber(2,0);
+    float xz = sqrt((x * x) + (z * z));
+    float xyz = sqrt((x * x) + (y * y) + (z * z));
+    float banaan = xz / xyz;
+    // Acos doet niet wat het moet doen
+    float hoek = acos(banaan);
+    return cos( sqrt((x * x) + (z * z)) / sqrt((x * x) + (y * y) + (z * z)) );
+}

@@ -40,7 +40,12 @@ public:
 
     void setEyeZ(float z) { eye.setZ(z); }
 
-    [[nodiscard]] Vector3D getEye() const { return eye; };
+    [[nodiscard]] Vector3D getEye() const { return eye; }
+
+    void rotateCameraY(float deg);
+    void rotateCameraZ(float deg);
+
+    void translateRelative(float x, float y, float z);
 
 private:
     Vector3D eye;

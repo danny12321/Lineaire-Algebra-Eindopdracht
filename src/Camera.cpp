@@ -59,4 +59,55 @@ Matrix Camera::getProjectionMatrix() {
     }};
 }
 
+void Camera::rotateCameraZ(float deg) {
+    deg = (180.f / 720) * deg;
+
+    Matrix eyeMatrix {eye};
+    eyeMatrix.pushOne();
+
+    float activeDeg = eyeMatrix.getAngleZ();
+    deg = deg - activeDeg;
+
+    std::cout << activeDeg << std::endl;
+
+    Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
+    Matrix rotation = Matrix::getRotationMatrixZ(deg);
+    Matrix m5 = Matrix::getRotationMatrixM5(eyeMatrix);
+    Matrix result = (m5 * rotation * m1) * eyeMatrix;
+
+    eye.setX(result.getNumber(0,0));
+    eye.setY(result.getNumber(1,0));
+    eye.setZ(result.getNumber(2,0));
+}
+
+void Camera::rotateCameraY(float deg) {
+
+}
+
+void Camera::translateRelative(float x, float y, float z) {
+    Matrix eyeMatrix {eye};
+    eyeMatrix.pushOne();
+
+    Matrix lookatMatrix {lookat};
+    lookatMatrix.pushOne();
+
+    Matrix m1 = Matrix::getRotationMatrixM1(eyeMatrix);
+    Matrix translation = Matrix::getTranslationMatrix(x, y, z);
+    Matrix m5 = Matrix::getRotationMatrixM5(eyeMatrix);
+    Matrix result = (m5 * translation * m1) * eyeMatrix;
+
+    Matrix l1 = Matrix::getRotationMatrixM1(lookatMatrix);
+    Matrix ltranslation = Matrix::getTranslationMatrix(x, y, z);
+    Matrix l5 = Matrix::getRotationMatrixM5(lookatMatrix);
+    Matrix lresult = (m5 * ltranslation * m1) * lookatMatrix;
+
+    eye.setX(result.getNumber(0,0));
+    eye.setY(result.getNumber(1,0));
+    eye.setZ(result.getNumber(2,0));
+
+    lookat.setX(lresult.getNumber(0,0));
+    lookat.setY(lresult.getNumber(1,0));
+    lookat.setZ(lresult.getNumber(2,0));
+}
+
 

@@ -36,6 +36,10 @@ public:
     static Matrix getRotationMatrixM4(Matrix m);
     static Matrix getRotationMatrixM5(Matrix m);
 
+    float getAngleX();
+    float getAngleY();
+    float getAngleZ();
+
     static Matrix getScaleMatrix(float scaleX, float scaleY, float scaleZ);
 private:
     const float PI = std::atan(1.0f)*4;
