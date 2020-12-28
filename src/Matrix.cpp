@@ -1,5 +1,7 @@
 
 #include "Matrix.hpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 Matrix::Matrix(Vector3D &vector) {
     this->matrix = {
@@ -88,8 +90,7 @@ Matrix Matrix::getTranslationMatrix(float tx, float ty, float tz) {
 }
 
 Matrix Matrix::getRotationMatrixX(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { 1, 0, 0, 0 },
@@ -102,8 +103,7 @@ Matrix Matrix::getRotationMatrixX(float deg) {
 
 
 Matrix Matrix::getRotationMatrixY(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { std::cos(rad), 0, std::sin(rad), 0 },
@@ -114,8 +114,7 @@ Matrix Matrix::getRotationMatrixY(float deg) {
 }
 
 Matrix Matrix::getRotationMatrixZ(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { std::cos(rad), -std::sin(rad), 0, 0 },
@@ -126,8 +125,7 @@ Matrix Matrix::getRotationMatrixZ(float deg) {
 }
 
 Matrix Matrix::getRotationNegativeMatrixX(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { 1, 0, 0, 0 },
@@ -138,8 +136,7 @@ Matrix Matrix::getRotationNegativeMatrixX(float deg) {
 }
 
 Matrix Matrix::getRotationNegativeMatrixY(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { std::cos(rad), 0, -std::sin(rad), 0 },
@@ -150,8 +147,7 @@ Matrix Matrix::getRotationNegativeMatrixY(float deg) {
 }
 
 Matrix Matrix::getRotationNegativeMatrixZ(float deg) {
-    float PI = std::atan(1.0f) * 4;
-    float rad = (deg / 180) * PI;
+    float rad = (deg / 180) * M_PI;
 
     return Matrix {{
                            { std::cos(rad), std::sin(rad), 0, 0 },
@@ -193,6 +189,16 @@ Matrix Matrix::getRotationMatrixM2(Matrix m) {
     float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
     float xyz = std::sqrt((matrixX * matrixX) + (matrixY * matrixY) + (matrixZ * matrixZ));
 
+
+    if(xyz == 0.0f) {
+        return Matrix{{
+                              {1, 0, 0, 0},
+                              {0, 1, 0, 0},
+                              {0, 0, 1, 0},
+                              {0, 0, 0, 1}
+                      }};
+    }
+
     return Matrix {{
                            { xz / xyz, matrixY / xyz, 0, 0 },
                            { -matrixY / xyz, xz / xyz, 0, 0 },
@@ -208,6 +214,15 @@ Matrix Matrix::getRotationMatrixM4(Matrix m) {
 
     float xz = std::sqrt((matrixX * matrixX) + (matrixZ * matrixZ));
     float xyz = std::sqrt((matrixX * matrixX) + (matrixY * matrixY) + (matrixZ * matrixZ));
+
+    if(xyz == 0.0f) {
+        return Matrix{{
+                              {1, 0, 0, 0},
+                              {0, 1, 0, 0},
+                              {0, 0, 1, 0},
+                              {0, 0, 0, 1}
+                      }};
+    }
 
     return Matrix {{
                            { xz / xyz, -matrixY / xyz, 0, 0 },

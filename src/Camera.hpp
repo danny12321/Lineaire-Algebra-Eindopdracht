@@ -60,8 +60,8 @@ public:
 private:
     Vector3D eye;
     Vector3D lookat;
-    Object3D* followingObject;
-    Vector3D* followingOffset;
+    Object3D* followingObject = nullptr;
+    Vector3D* followingOffset = nullptr;
     float near = 0.1f;
     float far = 100;
     float fovy = 60;

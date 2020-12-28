@@ -93,8 +93,15 @@ void CoordinateSystem::renderObject(const Object3D &object) {
         Matrix lineEnd { *line->end };
         lineEnd.pushOne();
 
-        Matrix c = naberekening(*multiplyMatrix * lineStart);
-        Matrix d = naberekening(*multiplyMatrix * lineEnd);
+        Matrix multiplyLineStart = *multiplyMatrix * lineStart;
+        Matrix multiplyLineEnd =  *multiplyMatrix * lineEnd;
+
+        if(multiplyLineStart.getNumber(3,0) < 0 || multiplyLineEnd.getNumber(3,0) < 0) {
+            continue;
+        }
+
+        Matrix c = naberekening(multiplyLineStart);
+        Matrix d = naberekening(multiplyLineEnd);
 //        Matrix c = *multiplyMatrix * lineStart;
 //        Matrix d = *multiplyMatrix * lineEnd;
 
@@ -113,7 +120,6 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
     float screenXHalf = (float)sdlRenderer.getScreenWidth() / 2;
     float screenYHalf = (float)sdlRenderer.getScreenHeight() / 2;
 
-
     float x = m.getNumber(0,0);
     // Ultra comment!
     // We doen de y-as keer -1 omdat sdl vanuit de linker bovenhoek rekend
@@ -122,6 +128,15 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
     float y = m.getNumber(1,0);
     float z = m.getNumber(2,0);
     float w = m.getNumber(3,0);
+
+    if(w < 0) {
+        return Matrix {{
+                               { 0 },
+                               { 0 },
+                               { 0 },
+                               { 0 }
+                       }};
+    }
 
     float xw = (x / w);
     float yw = (y / w);
@@ -132,7 +147,7 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
            { yw },
            { zw },
            { 1 }
-   }};
+    }};
 
     return Matrix {{
            { screenXHalf + ((xw / 2) * screenXHalf) },

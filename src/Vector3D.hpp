@@ -6,6 +6,7 @@
 #define LINAL_VECTOR3D_HPP
 
 #include <cmath>
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 class Vector3D {
@@ -37,7 +38,6 @@ public:
 //    Matrix getMatrix1x2();
 //    Matrix getMatrix1x3();
 private:
-    const float PI = std::atan(1.0f)*4;
     float x, y, z;
 };
 

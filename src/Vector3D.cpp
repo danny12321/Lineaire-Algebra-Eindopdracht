@@ -62,7 +62,7 @@ float Vector3D::getAngleBetween(const Vector3D &a) {
     float dotproduct = this->dotProduct(a);
     float lengthThis = this->getLength();
     float lengthA = a.getLength();
-    return (acos(dotproduct / (lengthThis * lengthA)) * 180) / PI;
+    return (acos(dotproduct / (lengthThis * lengthA)) * 180) / M_PI;
 }
 
 Vector3D Vector3D::getEenheidsvector() {
