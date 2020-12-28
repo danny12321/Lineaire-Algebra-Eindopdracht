@@ -5,11 +5,12 @@
 #include "Spaceship.hpp"
 #include "../EventSystem.hpp"
 #include "Cube.hpp"
+#include "Bullet.hpp"
 
 Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager), Object3D() {
     Vector3D* v1 = new Vector3D{0,0,0};
-    Vector3D* v2 = new Vector3D{0,100,0};
-    Vector3D* v3 = new Vector3D{0,0,100};
+    Vector3D* v2 = new Vector3D{0,5,0};
+    Vector3D* v3 = new Vector3D{0,0,5};
 
     points.push_back(v1);
     points.push_back(v2);
@@ -42,12 +43,16 @@ void Spaceship::update(const EventSystem &system) {
 }
 
 void Spaceship::shoot() {
-//    float bulletSpeed = 1;
-//    Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
-//    Vector3D normalVectorFromOrigin = normalVector - *canon[0];
-//    Vector3D bulletVector = normalVector * bulletSpeed;
-std::cout << "Shoot" << std::endl;
-    objectManager.addObject<Cube>(new Cube());
+    float bulletSpeed = 1;
+    Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
+    Vector3D normalVectorOne = normalVector.getEenheidsvector();
+    Vector3D normalVectorFromOrigin = normalVector - *canon[0];
+    Vector3D bulletVector = normalVector * bulletSpeed;
+    std::cout << "Shoot" << std::endl;
+    Vector3D position {0,0,0};
+    Vector3D velocity {0,0,0};
+    Vector3D rotation {0,0,0};
 
+    objectManager.addObject<Bullet>(new Bullet(*canon[0], velocity, normalVector));
 //    std::cout << "x " << a.getX() << " b " << a.getY() << " z " << a.getZ() << std::endl;
 }

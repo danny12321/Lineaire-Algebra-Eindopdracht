@@ -36,9 +36,9 @@ float Vector3D::dotProduct(const Vector3D &a) {
 
 Vector3D Vector3D::crossProduct(const Vector3D &a) {
     return Vector3D(
-            this->getY() * a.getZ() - this->getZ() * a.getY(),
-            this->getZ() * a.getX() - this->getX() * a.getZ(),
-            this->getX() * a.getY() - this->getY() * a.getX()
+            (this->getY() * a.getZ()) - (this->getZ() * a.getY()),
+            (this->getZ() * a.getX()) - (this->getX() * a.getZ()),
+            (this->getX() * a.getY()) - (this->getY() * a.getX())
     );
 }
 

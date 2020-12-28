@@ -24,10 +24,10 @@ TEST(Object3D, getNormalVectorTwo)
 {
     Object3D obj{};
 //     Arrange
-    Vector3D origin {3,3,3};
-    Vector3D a {4,3,3};
+    Vector3D origin {0,1,1};
+    Vector3D a {0,1,2};
 
-    Vector3D b {3,4,3};
+    Vector3D b {1,1,1};
 
 //     Act
     Vector3D result = obj.getNormalVector(origin, a, b);

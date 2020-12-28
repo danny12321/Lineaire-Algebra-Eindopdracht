@@ -199,8 +199,8 @@ void Object3D::rotateLocalZ(float deg) {
 }
 
 Vector3D Object3D::getNormalVector(const Vector3D &origin, const Vector3D &v1, const Vector3D &v2) {
-    Vector3D newV1 = Vector3D{v1.getX() - origin.getX(), v1.getY() - origin.getY(), v1.getZ() - origin.getZ(), };
-    Vector3D newV2 = Vector3D{v2.getX() - origin.getX(), v2.getY() - origin.getY(), v2.getZ() - origin.getZ(), };
+    Vector3D newV1 = Vector3D{v1.getX() - origin.getX(), v1.getY() - origin.getY(), v1.getZ() - origin.getZ() };
+    Vector3D newV2 = Vector3D{v2.getX() - origin.getX(), v2.getY() - origin.getY(), v2.getZ() - origin.getZ() };
     Vector3D normalVector = newV1.crossProduct(newV2);
     normalVector.setX(normalVector.getX() + origin.getX());
     normalVector.setY(normalVector.getY() + origin.getY());
