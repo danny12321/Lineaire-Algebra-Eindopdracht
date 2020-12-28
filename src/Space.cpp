@@ -7,12 +7,17 @@
 #include "3DObjects/Pyramid.hpp"
 #include "3DObjects/Jezus.hpp"
 #include "3DObjects/Spaceship.hpp"
+#include "3DObjects/Axis.hpp"
 
 Space::Space() : camera({{5, 5, 5},
                          {0, 0, 0}}), coordinateSystem({sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1}) {
     sdlRenderer.init();
     eventSystem.addEventHandler(getEventHandler());
+
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
+    objectManager.addObject<Axis>(new Axis(new Vector3D{4, 0,0}, 255,0,0)); // x
+    objectManager.addObject<Axis>(new Axis(new Vector3D{0, 4,0}, 0,255,0)); // y
+    objectManager.addObject<Axis>(new Axis(new Vector3D{0, 0,4}, 0,0,255)); // z
     objectManager.doAddObjects();
 //    objects.emplace_back(std::make_unique<Jezus>());
     objectManager.getObjects().at(0)->toOrigin();
