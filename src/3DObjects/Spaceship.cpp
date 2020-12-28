@@ -6,7 +6,7 @@
 #include "../EventSystem.hpp"
 #include "Cube.hpp"
 
-Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager), Object3D() {
+Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager), Object3D("starfighter") {
     Vector3D* v1 = new Vector3D{0,0,0};
     Vector3D* v2 = new Vector3D{0,100,0};
     Vector3D* v3 = new Vector3D{0,0,100};
@@ -37,8 +37,8 @@ void Spaceship::update(const EventSystem &system) {
     if (system.keyIsPressed(SDLK_a)) rotateLocalY(1);
     if (system.keyIsPressed(SDLK_d)) rotateLocalY(-1);
 
-    if(system.keyIsPressed(SDLK_SPACE)) shoot();
-    if(system.keyIsPressed(SDLK_h)) std::cout << "Helpline activated" << std::endl;
+    if(system.keyIsPressedOnce(SDLK_SPACE)) shoot();
+    if(system.keyPressedThisUpdate(SDLK_h)) std::cout << "Helpline activated" << std::endl;
 }
 
 void Spaceship::shoot() {
