@@ -8,7 +8,7 @@ void Bullet::update(const EventSystem &system) {
     translate(velocity.getX(), velocity.getY(), velocity.getZ());
 }
 
-Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : velocity(velocity) {
+Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : velocity(velocity), Object3D("jezus") {
 
     points.push_back(new Vector3D{0,0,1});
     points.push_back(new Vector3D{0,0,0});
@@ -36,14 +36,16 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
     lines.push_back(new Line {points[2], points[6]});
     lines.push_back(new Line {points[3], points[7]});
 
+    scale(0.1, 0.1, 0.1);
+
 //    std::cout << "position " << "x:" <<position.getX() << " y:" << position.getY()<< " z:" << position.getZ() << std::endl;
 //    std::cout << "rotation " << "x:" <<rotation.getX() << " y:" << rotation.getY()<< " z:" << rotation.getZ() << std::endl;
 //    std::cout << "Angle: " << position.getAngleBetween(rotation) << std::endl;
 
     Vector3D vel = (rotation - position).getEenheidsvector();
-    this->velocity.setX(vel.getX() * 0.01f);
-    this->velocity.setY(vel.getY() * 0.01f);
-    this->velocity.setZ(vel.getZ() * 0.01f);
+    this->velocity.setX(vel.getX() * 0.05f);
+    this->velocity.setY(vel.getY() * 0.05f);
+    this->velocity.setZ(vel.getZ() * 0.05f);
 //    float schuinezijde = rotationFromOrigin.getLength();
 //    float aanliggende = rotationFromOrigin.getX();
 //    const float PI = std::atan(1.0f) * 4;
