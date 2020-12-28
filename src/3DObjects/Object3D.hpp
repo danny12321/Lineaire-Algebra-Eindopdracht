@@ -28,6 +28,10 @@ public:
     void rotateY(float deg);
     void rotateZ(float deg);
 
+    void rotateLocalX(float deg);
+    void rotateLocalY(float deg);
+    void rotateLocalZ(float deg);
+
     void rotateAxis(const Vector3D& v, float deg);
 
     void scale(float scaleX, float scaleY, float scaleZ);
@@ -46,10 +50,16 @@ public:
 
     void toOrigin();
 
+    Vector3D getNormalVector(const Vector3D& origin, const Vector3D& v1, const Vector3D& v2);
+
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
 private:
+    float rotationX = 0;
+    float rotationY = 0;
+    float rotationZ = 0;
+
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);
     Vector3D getMiddle();

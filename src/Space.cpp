@@ -11,12 +11,13 @@
 Space::Space() : camera({{5, 5, 5},
                          {0, 0, 0}}), coordinateSystem({sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1}) {
     sdlRenderer.init();
-    objects.emplace_back(std::make_unique<Spaceship>());
+    objectManager.addObject<Spaceship>(new Spaceship(objectManager));
+    objectManager.doAddObjects();
 //    objects.emplace_back(std::make_unique<Jezus>());
-    objects[0]->toOrigin();
-    objects[0]->scale(0.01, 0.01, 0.01);
-    objects[0]->translate(1,2,1);
-    objects[0]->rotateX(-90);
+    objectManager.getObjects().at(0)->toOrigin();
+    objectManager.getObjects().at(0)->scale(0.01, 0.01, 0.01);
+    objectManager.getObjects().at(0)->translate(1,2,1);
+    objectManager.getObjects().at(0)->rotateX(-90);
 }
 
 Space::~Space() {
@@ -31,7 +32,7 @@ void Space::run() {
 
         handleEvents();
 
-        update();
+        objectManager.update(eventSystem);
 
         render();
 
@@ -40,15 +41,14 @@ void Space::run() {
 }
 
 void Space::update() {
-    for (auto &object : objects)
-        object->update(eventSystem);
+
 }
 
 void Space::render() {
     Matrix multiplyMatrix = camera.getProjectionMatrix() * camera.getToOriginMatrix();
     coordinateSystem.setMultiplyMatrix(multiplyMatrix);
 
-    for (const auto &object : objects)
+    for (const auto &object : objectManager.getObjects())
         coordinateSystem.renderObject(*object);
 
     sdlRenderer.setDrawColor(0, 0, 0, 255);

@@ -5,12 +5,11 @@
 #ifndef LINAL_SPACE_HPP
 #define LINAL_SPACE_HPP
 
-
-#include "3DObjects/Object3D.hpp"
+#include "ObjectManager.hpp"
 #include "SDLRenderer.hpp"
 #include "CoordinateSystem.hpp"
 #include "EventSystem.hpp"
-#include "Camera.hpp";
+#include "Camera.hpp"
 
 class Space {
 public:
@@ -25,7 +24,7 @@ public:
 private:
     void render();
 
-    std::vector<std::unique_ptr<Object3D>> objects;
+    ObjectManager objectManager;
     SDLRenderer sdlRenderer;
     CoordinateSystem coordinateSystem;
     EventSystem eventSystem;

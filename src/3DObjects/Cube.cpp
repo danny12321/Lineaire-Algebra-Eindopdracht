@@ -40,3 +40,8 @@ Cube::Cube() {
     lines.push_back(new Line {points[2], points[6]});
     lines.push_back(new Line {points[3], points[7]});
 }
+
+void Cube::update(const EventSystem &system) {
+}
+
+
