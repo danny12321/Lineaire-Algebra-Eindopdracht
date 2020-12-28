@@ -9,8 +9,8 @@
 
 Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager), Object3D("starfighter") {
     Vector3D* v1 = new Vector3D{0,0,0};
-    Vector3D* v2 = new Vector3D{0,5,0};
-    Vector3D* v3 = new Vector3D{0,0,5};
+    Vector3D* v2 = new Vector3D{-50,0,0};
+    Vector3D* v3 = new Vector3D{0,0,50};
 
     points.push_back(v1);
     points.push_back(v2);

@@ -15,11 +15,10 @@ Space::Space() : camera({{5, 5, 5},
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
     objectManager.doAddObjects();
 //    objects.emplace_back(std::make_unique<Jezus>());
-//    objectManager.getObjects().at(0)->toOrigin();
-//    objectManager.getObjects().at(0)->scale(0.1, 0.1, 0.1);
-//    objectManager.getObjects().at(0)->translate(1,2,1);
-//    objectManager.getObjects().at(0)->rotateZ(100);
-//    objectManager.getObjects().at(0)->rotateY(20);
+    objectManager.getObjects().at(0)->toOrigin();
+    objectManager.getObjects().at(0)->scale(0.01, 0.01, 0.01);
+    objectManager.getObjects().at(0)->translate(1,2,1);
+    objectManager.getObjects().at(0)->rotateX(-90);
 }
 
 Space::~Space() {

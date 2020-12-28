@@ -41,9 +41,9 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
 //    std::cout << "Angle: " << position.getAngleBetween(rotation) << std::endl;
 
     Vector3D vel = (rotation - position).getEenheidsvector();
-    velocity.setX(vel.getX() * 0.1);
-    velocity.setY(vel.getY() * 0.1);
-    velocity.setZ(vel.getZ() * 0.1);
+    this->velocity.setX(vel.getX() * 0.01f);
+    this->velocity.setY(vel.getY() * 0.01f);
+    this->velocity.setZ(vel.getZ() * 0.01f);
 //    float schuinezijde = rotationFromOrigin.getLength();
 //    float aanliggende = rotationFromOrigin.getX();
 //    const float PI = std::atan(1.0f) * 4;
@@ -58,5 +58,7 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
 //    float hoekxz = (acos( b / a ) * 180) / PI;
 //    rotateZ(hoekxy);
 //    rotateY(hoekxz);
+    rotateZ(45);
+    rotateY(20);
     translate(position.getX(), position.getY(), position.getZ());
 }
