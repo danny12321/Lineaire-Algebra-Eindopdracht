@@ -10,11 +10,12 @@
 class Bullet : public Object3D {
 
 public:
-    Bullet(Vector3D position, Vector3D velocity, Vector3D rotation);
+    Bullet(Vector3D position, float velocity, Vector3D rotation);
     void update(const EventSystem &system) override;
 
 private:
-    Vector3D velocity;
+    Vector3D velocity {0,0,0};
+    float bulletSpeed = 1.0f;
 };
 
 

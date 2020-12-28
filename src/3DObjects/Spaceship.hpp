@@ -17,7 +17,9 @@ public:
     void shoot();
 
 private:
+    void move();
     ObjectManager& objectManager;
+    float velocity = 0.0f;
     std::vector<Vector3D*> canon;
 };
 

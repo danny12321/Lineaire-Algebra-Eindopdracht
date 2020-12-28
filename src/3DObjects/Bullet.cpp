@@ -8,7 +8,9 @@ void Bullet::update(const EventSystem &system) {
     translate(velocity.getX(), velocity.getY(), velocity.getZ());
 }
 
-Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : velocity(velocity) {
+Bullet::Bullet(Vector3D position, float spaceShipVelocity, Vector3D rotation) {
+
+    this->setColor(255,0,0);
 
     points.push_back(new Vector3D{0,0,.1});
     points.push_back(new Vector3D{0,0,0});
@@ -18,8 +20,6 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
     points.push_back(new Vector3D{0,.1,0});
     points.push_back(new Vector3D{.1,.1,0});
     points.push_back(new Vector3D{.1,.1,.1});
-
-    this->setColor(255,0,0);
 
     // Create lines with these points
     lines.push_back(new Line {points[0], points[1]});
@@ -36,16 +36,12 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
     lines.push_back(new Line {points[2], points[6]});
     lines.push_back(new Line {points[3], points[7]});
 
-//    scale(0.1, 0.1, 0.1);
 
-//    std::cout << "position " << "x:" <<position.getX() << " y:" << position.getY()<< " z:" << position.getZ() << std::endl;
-//    std::cout << "rotation " << "x:" <<rotation.getX() << " y:" << rotation.getY()<< " z:" << rotation.getZ() << std::endl;
-//    std::cout << "Angle: " << position.getAngleBetween(rotation) << std::endl;
+    Vector3D direction = (rotation - position).getEenheidsvector();
+    this->velocity.setX(direction.getX() * (spaceShipVelocity + bulletSpeed));
+    this->velocity.setY(direction.getY() * (spaceShipVelocity + bulletSpeed));
+    this->velocity.setZ(direction.getZ() * (spaceShipVelocity + bulletSpeed));
 
-    Vector3D vel = (rotation - position).getEenheidsvector();
-    this->velocity.setX(vel.getX() * 0.5f);
-    this->velocity.setY(vel.getY() * 0.5f);
-    this->velocity.setZ(vel.getZ() * 0.5f);
 //    float schuinezijde = rotationFromOrigin.getLength();
 //    float aanliggende = rotationFromOrigin.getX();
 //    const float PI = std::atan(1.0f) * 4;
@@ -60,5 +56,6 @@ Bullet::Bullet(Vector3D position, Vector3D velocity, Vector3D rotation) : veloci
 //    float hoekxz = (acos( b / a ) * 180) / PI;
 //    rotateZ(hoekxy);
 //    rotateY(hoekxz);
+
     translate(position.getX(), position.getY(), position.getZ());
 }

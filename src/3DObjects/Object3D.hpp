@@ -56,6 +56,7 @@ public:
 
     Vector3D getNormalVector(const Vector3D& origin, const Vector3D& v1, const Vector3D& v2);
 
+    Vector3D getMiddle();
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
@@ -66,7 +67,6 @@ private:
 
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);
-    Vector3D getMiddle();
     int r = 255;
     int g = 255;
     int b = 255;

@@ -8,6 +8,7 @@
 #include "Matrix.hpp"
 #include "Vector3D.hpp"
 #include "EventSystem.hpp"
+#include "3DObjects/Object3D.hpp"
 
 class Camera {
 public:
@@ -53,9 +54,14 @@ public:
 
     void handleEvents(const EventSystem &system);
 
+    void followObject(Object3D& object, Vector3D* offset);
+
+    void update();
 private:
     Vector3D eye;
     Vector3D lookat;
+    Object3D* followingObject;
+    Vector3D* followingOffset;
     float near = 0.1f;
     float far = 100;
     float fovy = 60;

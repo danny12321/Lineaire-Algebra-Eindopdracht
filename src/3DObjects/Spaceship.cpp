@@ -27,32 +27,35 @@ Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager
 
 void Spaceship::update(const EventSystem &system) {
 //    ROLL
-    if (system.keyIsPressed(SDLK_q)) rotateZ(1);
-    if (system.keyIsPressed(SDLK_e)) rotateZ(-1);
+    if (system.keyIsPressed(SDLK_q)) rotateZ(3);
+    if (system.keyIsPressed(SDLK_e)) rotateZ(-3);
 
 //    PITCH
-    if (system.keyIsPressed(SDLK_w)) rotateX(-1);
-    if (system.keyIsPressed(SDLK_s)) rotateX(1);
+    if (system.keyIsPressed(SDLK_w)) rotateX(3);
+    if (system.keyIsPressed(SDLK_s)) rotateX(-3);
 
 //    Yaw
-    if (system.keyIsPressed(SDLK_a)) rotateY(1);
-    if (system.keyIsPressed(SDLK_d)) rotateY(-1);
+    if (system.keyIsPressed(SDLK_a)) rotateY(3);
+    if (system.keyIsPressed(SDLK_d)) rotateY(-3);
+
+    if (system.keyIsPressed(SDLK_z)) velocity += 0.1;
+    if (system.keyIsPressed(SDLK_x)) velocity += -0.1;
 
     if(system.keyIsPressedOnce(SDLK_SPACE)) shoot();
     if(system.keyPressedThisUpdate(SDLK_h)) rotateToOrigin();
+
+move();
 }
 
 void Spaceship::shoot() {
-    float bulletSpeed = 1;
     Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
-    Vector3D normalVectorOne = normalVector.getEenheidsvector();
-    Vector3D normalVectorFromOrigin = normalVector - *canon[0];
-    Vector3D bulletVector = normalVector * bulletSpeed;
-    std::cout << "Shoot" << std::endl;
-    Vector3D position {0,0,0};
-    Vector3D velocity {0,0,0};
-    Vector3D rotation {0,0,0};
 
     objectManager.addObject<Bullet>(new Bullet(*canon[0], velocity, normalVector));
-//    std::cout << "x " << a.getX() << " b " << a.getY() << " z " << a.getZ() << std::endl;
+}
+
+void Spaceship::move() {
+    // Zelfde kant op als de kogel, als we een andere kant op willen moeten nog een driehoek maken.
+    Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
+    Vector3D a = (normalVector - *canon[0]).getEenheidsvector();
+    translate(a.getX() * velocity, a.getY() * velocity, a.getZ() * velocity);
 }

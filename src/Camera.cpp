@@ -162,3 +162,24 @@ void Camera::handleEvents(const EventSystem &system) {
     if (system.keyIsPressed(SDLK_r)) rotateCameraZ(1);
     if (system.keyIsPressed(SDLK_f)) rotateCameraZ(-1);
 }
+
+void Camera::followObject(Object3D &object, Vector3D* offset) {
+    followingObject = &object;
+    followingOffset = offset;
+}
+
+void Camera::update() {
+    if(followingObject == nullptr) {
+        return;
+    }
+
+    Vector3D middle = followingObject->getMiddle();
+
+    lookat.setX(middle.getX());
+    lookat.setY(middle.getY());
+    lookat.setZ(middle.getZ());
+
+    eye.setX(middle.getX() + followingOffset->getX());
+    eye.setY(middle.getY() + followingOffset->getY());
+    eye.setZ(middle.getZ() + followingOffset->getZ());
+}
