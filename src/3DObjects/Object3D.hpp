@@ -24,6 +24,10 @@ public:
     void rotateAroundOriginY(float deg);
     void rotateAroundOriginZ(float deg);
 
+    void rotateLocalAxis(float x, float y, float z);
+
+    void rotateToOrigin();
+
     void rotateX(float deg);
     void rotateY(float deg);
     void rotateZ(float deg);
@@ -63,9 +67,9 @@ private:
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);
     Vector3D getMiddle();
-    int r= 255;
-    int g= 255;
-    int b =255;
+    int r = 255;
+    int g = 255;
+    int b = 255;
 };
 
 

@@ -30,6 +30,9 @@ public:
     static Matrix getRotationMatrixX(float deg);
     static Matrix getRotationMatrixY(float deg);
     static Matrix getRotationMatrixZ(float deg);
+    static Matrix getRotationNegativeMatrixX(float deg);
+    static Matrix getRotationNegativeMatrixY(float deg);
+    static Matrix getRotationNegativeMatrixZ(float deg);
 
     static Matrix getRotationMatrixM1(Matrix m);
     static Matrix getRotationMatrixM2(Matrix m);
