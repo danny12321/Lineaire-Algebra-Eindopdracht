@@ -11,6 +11,7 @@
 Space::Space() : camera({{5, 5, 5},
                          {0, 0, 0}}), coordinateSystem({sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1}) {
     sdlRenderer.init();
+    eventSystem.addEventHandler(getEventHandler());
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
     objectManager.doAddObjects();
 //    objects.emplace_back(std::make_unique<Jezus>());
@@ -58,4 +59,11 @@ void Space::render() {
 
 void Space::handleEvents() {
     camera.handleEvents(eventSystem);
+}
+
+std::function<void(const SDL_Event &)> Space::getEventHandler() {
+    return [this](const SDL_Event& e) {
+        // process data
+        if(e.type == SDL_QUIT) this->sdlRenderer.quitApp();
+    };
 }

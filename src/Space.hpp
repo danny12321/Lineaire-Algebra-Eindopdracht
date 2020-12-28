@@ -32,6 +32,8 @@ private:
     Camera camera;
 
     void handleEvents();
+
+    std::function<void(const SDL_Event &)> getEventHandler();
 };
 
 
