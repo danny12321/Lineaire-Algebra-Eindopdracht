@@ -23,20 +23,24 @@ Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager
     canon.push_back(v1);
     canon.push_back(v2);
     canon.push_back(v3);
+
+    rotateX(90);
+
+    resetXyzAxis();
 }
 
 void Spaceship::update(const EventSystem &system) {
 //    ROLL
-    if (system.keyIsPressed(SDLK_q)) rotateZ(3);
-    if (system.keyIsPressed(SDLK_e)) rotateZ(-3);
+    if (system.keyIsPressed(SDLK_q)) rotateLocalZ(3);
+    if (system.keyIsPressed(SDLK_e)) rotateLocalZ(-3);
 
 //    PITCH
-    if (system.keyIsPressed(SDLK_w)) rotateX(3);
-    if (system.keyIsPressed(SDLK_s)) rotateX(-3);
+    if (system.keyIsPressed(SDLK_w)) rotateLocalX(3);
+    if (system.keyIsPressed(SDLK_s)) rotateLocalX(-3);
 
 //    Yaw
-    if (system.keyIsPressed(SDLK_a)) rotateY(3);
-    if (system.keyIsPressed(SDLK_d)) rotateY(-3);
+    if (system.keyIsPressed(SDLK_a)) rotateLocalY(3);
+    if (system.keyIsPressed(SDLK_d)) rotateLocalY(-3);
 
     if (system.keyIsPressed(SDLK_z)) velocity += 0.1;
     if (system.keyIsPressed(SDLK_x)) velocity += -0.1;

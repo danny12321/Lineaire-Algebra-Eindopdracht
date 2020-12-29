@@ -30,6 +30,8 @@ public:
 
     void renderObject(const Object3D& object);
 
+
+
     Matrix naberekening(const Matrix& m);
 
     void renderLine(Vector3D &v1, Vector3D &v2);

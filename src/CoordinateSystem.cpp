@@ -85,8 +85,35 @@ void CoordinateSystem::minusXYLineSize(int size) {
 }
 
 void CoordinateSystem::renderObject(const Object3D &object) {
-    sdlRenderer.setDrawColor(object.getRedColor(), object.getGreenColor(), object.getBlueColor(), 255);
 
+    auto a = object.getXyzAxisLines();
+    if(!object.getXyzAxisLines().empty()) {
+        sdlRenderer.setDrawColor(255, 0, 0, 255);
+
+        for(auto line : object.getXyzAxisLines()) {
+            Matrix lineStart { *line->start };
+            lineStart.pushOne();
+            Matrix lineEnd { *line->end };
+            lineEnd.pushOne();
+
+            Matrix multiplyLineStart = *multiplyMatrix * lineStart;
+            Matrix multiplyLineEnd =  *multiplyMatrix * lineEnd;
+
+            if(multiplyLineStart.getNumber(3,0) < 0 || multiplyLineEnd.getNumber(3,0) < 0) {
+                continue;
+            }
+
+            Matrix matrixLineStart = naberekening(multiplyLineStart);
+            Matrix matrixLineEnd = naberekening(multiplyLineEnd);
+
+            Vector3D pointOne {matrixLineStart.getNumber(0, 0), matrixLineStart.getNumber(1, 0), matrixLineStart.getNumber(2, 0)};
+            Vector3D pointTwo {matrixLineEnd.getNumber(0, 0), matrixLineEnd.getNumber(1, 0), matrixLineEnd.getNumber(2, 0)};
+
+            renderLine(pointOne, pointTwo);
+        }
+    }
+
+    sdlRenderer.setDrawColor(object.getRedColor(), object.getGreenColor(), object.getBlueColor(), 255);
     for(auto line : object.getLines()) {
         Matrix lineStart { *line->start };
         lineStart.pushOne();
@@ -100,18 +127,12 @@ void CoordinateSystem::renderObject(const Object3D &object) {
             continue;
         }
 
-        Matrix c = naberekening(multiplyLineStart);
-        Matrix d = naberekening(multiplyLineEnd);
-//        Matrix c = *multiplyMatrix * lineStart;
-//        Matrix d = *multiplyMatrix * lineEnd;
+        Matrix matrixLineStart = naberekening(multiplyLineStart);
+        Matrix matrixLineEnd = naberekening(multiplyLineEnd);
 
-        if(c.getNumber(3,0) < 0) return;
-        if(d.getNumber(3,0) < 0) return;
+        Vector3D pointOne {matrixLineStart.getNumber(0, 0), matrixLineStart.getNumber(1, 0), matrixLineStart.getNumber(2, 0)};
+        Vector3D pointTwo {matrixLineEnd.getNumber(0, 0), matrixLineEnd.getNumber(1, 0), matrixLineEnd.getNumber(2, 0)};
 
-        Vector3D pointOne {c.getNumber(0, 0), c.getNumber(1, 0), c.getNumber(2, 0)};
-        Vector3D pointTwo {d.getNumber(0, 0), d.getNumber(1, 0), d.getNumber(2, 0)};
-
-//        sdlRenderer.drawLine(pointOne.getX(), pointOne.getY(), pointTwo.getX(), pointTwo.getY());
         renderLine(pointOne, pointTwo);
     }
 }

@@ -16,6 +16,7 @@ public:
     explicit Object3D(const std::string &filename);
 
     [[nodiscard]] std::vector<Line*> getLines() const { return lines; }
+    [[nodiscard]] std::vector<Line*> getXyzAxisLines() const { return localXyzLines; }
     void addLine(Line* line) { lines.push_back(line); }
 
     void translate(float x, float y, float z);
@@ -57,9 +58,13 @@ public:
     Vector3D getNormalVector(const Vector3D& origin, const Vector3D& v1, const Vector3D& v2);
 
     Vector3D getMiddle();
+
+    void resetXyzAxis();
 protected:
     std::vector<Line*> lines;
     std::vector<Vector3D*> points;
+    std::vector<Line*> localXyzLines;
+    std::vector<Vector3D*> localXyzPoints;
 private:
     float rotationX = 0;
     float rotationY = 0;
