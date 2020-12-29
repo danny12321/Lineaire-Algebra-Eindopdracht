@@ -22,7 +22,7 @@ Space::Space() : camera({{5, 5, 5},
 //    objects.emplace_back(std::make_unique<Jezus>());
     objectManager.getObjects().at(0)->toOrigin();
     objectManager.getObjects().at(0)->scale(0.1, 0.1, 0.1);
-//    objectManager.getObjects().at(0)->translate(5,2,1);
+    objectManager.getObjects().at(0)->translate(5,2,1);
 //    objectManager.getObjects().at(0)->rotateLocalAxis(45,45,45);
 //    objectManager.getObjects().at(0)->rotateLocalAxis(0,0,30);
 //    objectManager.getObjects().at(0)->rotateToOrigin();
