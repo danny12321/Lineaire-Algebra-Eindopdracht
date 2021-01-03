@@ -19,3 +19,23 @@ void ObjectManager::doAddObjects() {
     }
     objectsToAdd.clear();
 }
+
+void ObjectManager::collisionCheck() {
+    for(auto& object : objects) {
+        for(auto& otherObject : objects) {
+            if(object != otherObject) {
+                if(doObjectsCollide(*object, *otherObject)) {
+                    object->collide(*otherObject);
+                }
+            }
+        }
+    }
+}
+
+bool ObjectManager::doObjectsCollide(Object3D &a, Object3D &b) {
+    return (a.getNegativeX() <= b.getPositiveX() && a.getPositiveX() >= b.getNegativeX()) &&
+           (a.getNegativeY() <= b.getPositiveY() && a.getPositiveY() >= b.getNegativeY()) &&
+           (a.getNegativeZ() <= b.getPositiveZ() && a.getPositiveX() >= b.getNegativeZ());
+}
+
+

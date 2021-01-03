@@ -62,10 +62,10 @@ void Object3D::updatePoints(const Matrix &m) {
         }
     }
 
+    resetBouningBox();
 }
 
 void Object3D::rotateX(float deg) {
-
     Vector3D middle = getMiddle();
 
     Matrix translation = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
@@ -281,4 +281,59 @@ void Object3D::resetXyzAxis() {
     localXyzLines.push_back(new Line {localXyzPoints[0], localXyzPoints[1]});
     localXyzLines.push_back(new Line {localXyzPoints[0], localXyzPoints[2]});
     localXyzLines.push_back(new Line {localXyzPoints[0], localXyzPoints[3]});
+}
+
+void Object3D::resetBouningBox() {
+    const float maxFloat = 999999;
+    const float minFloat = -999999;
+    positiveX = minFloat;
+    negativeX = maxFloat;
+    positiveY = minFloat;
+    negativeY = maxFloat;
+    positiveZ = minFloat;
+    negativeZ = maxFloat;
+
+    for(auto point : points) {
+        if(point->getX() > positiveX) positiveX = point->getX();
+        if(point->getX() < negativeX) negativeX = point->getX();
+        if(point->getY() > positiveY) positiveY = point->getY();
+        if(point->getY() < negativeY) negativeY = point->getY();
+        if(point->getZ() > positiveZ) positiveZ = point->getZ();
+        if(point->getZ() < negativeZ) negativeZ = point->getZ();
+    }
+
+    boundingBox.clear();
+    // A
+    boundingBox.push_back(new Vector3D{negativeX, negativeY, positiveZ});
+    // B
+    boundingBox.push_back(new Vector3D{negativeX, negativeY, negativeZ});
+    // C
+    boundingBox.push_back(new Vector3D{positiveX, negativeY, negativeZ});
+    // D
+    boundingBox.push_back(new Vector3D{positiveX, negativeY, positiveZ});
+
+    // E
+    boundingBox.push_back(new Vector3D{negativeX, positiveY, positiveZ});
+    // F
+    boundingBox.push_back(new Vector3D{negativeX, positiveY, negativeZ});
+    // G
+    boundingBox.push_back(new Vector3D{positiveX, positiveY, negativeZ});
+    // H
+    boundingBox.push_back(new Vector3D{positiveX, positiveY, positiveZ});
+
+    boundingBoxLines.clear();
+    boundingBoxLines.push_back(new Line {boundingBox[0], boundingBox[1]});
+    boundingBoxLines.push_back(new Line {boundingBox[1], boundingBox[2]});
+    boundingBoxLines.push_back(new Line {boundingBox[2], boundingBox[3]});
+    boundingBoxLines.push_back(new Line {boundingBox[3], boundingBox[0]});
+
+    boundingBoxLines.push_back(new Line {boundingBox[4], boundingBox[5]});
+    boundingBoxLines.push_back(new Line {boundingBox[5], boundingBox[6]});
+    boundingBoxLines.push_back(new Line {boundingBox[6], boundingBox[7]});
+    boundingBoxLines.push_back(new Line {boundingBox[7], boundingBox[4]});
+
+    boundingBoxLines.push_back(new Line {boundingBox[0], boundingBox[4]});
+    boundingBoxLines.push_back(new Line {boundingBox[1], boundingBox[5]});
+    boundingBoxLines.push_back(new Line {boundingBox[2], boundingBox[6]});
+    boundingBoxLines.push_back(new Line {boundingBox[3], boundingBox[7]});
 }

@@ -39,6 +39,12 @@ Cube::Cube() {
     lines.push_back(new Line {points[1], points[5]});
     lines.push_back(new Line {points[2], points[6]});
     lines.push_back(new Line {points[3], points[7]});
+
+
+    resetXyzAxis();
+    rotateLocalX(45);
+    rotateLocalY(45);
+    resetBouningBox();
 }
 
 void Cube::update(const EventSystem &system) {

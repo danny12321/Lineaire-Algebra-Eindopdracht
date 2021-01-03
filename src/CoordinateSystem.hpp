@@ -30,13 +30,13 @@ public:
 
     void renderObject(const Object3D& object);
 
-
-
     Matrix naberekening(const Matrix& m);
 
     void renderLine(Vector3D &v1, Vector3D &v2);
 
     void setMultiplyMatrix(Matrix m) { multiplyMatrix = std::make_unique<Matrix>(m); };
+
+    void renderLineList(const std::vector<Line*>& lines);
 private:
     std::unique_ptr<Matrix> multiplyMatrix;
     int maxXLineSize = 500;

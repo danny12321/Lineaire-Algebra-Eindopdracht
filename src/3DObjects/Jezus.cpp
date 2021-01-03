@@ -4,4 +4,8 @@
 
 #include "Jezus.hpp"
 
-Jezus::Jezus() : Object3D("jezus") {}
+Jezus::Jezus() : Object3D("jezus") {
+    rotateX(90);
+
+    resetXyzAxis();
+}

@@ -86,55 +86,20 @@ void CoordinateSystem::minusXYLineSize(int size) {
 
 void CoordinateSystem::renderObject(const Object3D &object) {
 
-    auto a = object.getXyzAxisLines();
-    if(!object.getXyzAxisLines().empty()) {
+    auto xyzLines = object.getXyzAxisLines();
+    if(!xyzLines.empty()) {
         sdlRenderer.setDrawColor(255, 0, 0, 255);
+        renderLineList(xyzLines);
+    }
 
-        for(auto line : object.getXyzAxisLines()) {
-            Matrix lineStart { *line->start };
-            lineStart.pushOne();
-            Matrix lineEnd { *line->end };
-            lineEnd.pushOne();
-
-            Matrix multiplyLineStart = *multiplyMatrix * lineStart;
-            Matrix multiplyLineEnd =  *multiplyMatrix * lineEnd;
-
-            if(multiplyLineStart.getNumber(3,0) < 0 || multiplyLineEnd.getNumber(3,0) < 0) {
-                continue;
-            }
-
-            Matrix matrixLineStart = naberekening(multiplyLineStart);
-            Matrix matrixLineEnd = naberekening(multiplyLineEnd);
-
-            Vector3D pointOne {matrixLineStart.getNumber(0, 0), matrixLineStart.getNumber(1, 0), matrixLineStart.getNumber(2, 0)};
-            Vector3D pointTwo {matrixLineEnd.getNumber(0, 0), matrixLineEnd.getNumber(1, 0), matrixLineEnd.getNumber(2, 0)};
-
-            renderLine(pointOne, pointTwo);
-        }
+    auto boundingBoxLines = object.getBoundingBox();
+    if(!boundingBoxLines.empty()) {
+        sdlRenderer.setDrawColor(0, 255, 0, 255);
+        renderLineList(boundingBoxLines);
     }
 
     sdlRenderer.setDrawColor(object.getRedColor(), object.getGreenColor(), object.getBlueColor(), 255);
-    for(auto line : object.getLines()) {
-        Matrix lineStart { *line->start };
-        lineStart.pushOne();
-        Matrix lineEnd { *line->end };
-        lineEnd.pushOne();
-
-        Matrix multiplyLineStart = *multiplyMatrix * lineStart;
-        Matrix multiplyLineEnd =  *multiplyMatrix * lineEnd;
-
-        if(multiplyLineStart.getNumber(3,0) < 0 || multiplyLineEnd.getNumber(3,0) < 0) {
-            continue;
-        }
-
-        Matrix matrixLineStart = naberekening(multiplyLineStart);
-        Matrix matrixLineEnd = naberekening(multiplyLineEnd);
-
-        Vector3D pointOne {matrixLineStart.getNumber(0, 0), matrixLineStart.getNumber(1, 0), matrixLineStart.getNumber(2, 0)};
-        Vector3D pointTwo {matrixLineEnd.getNumber(0, 0), matrixLineEnd.getNumber(1, 0), matrixLineEnd.getNumber(2, 0)};
-
-        renderLine(pointOne, pointTwo);
-    }
+    renderLineList(object.getLines());
 }
 
 Matrix CoordinateSystem::naberekening(const Matrix& m) {
@@ -143,7 +108,7 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
 
     float x = m.getNumber(0,0);
     // Ultra comment!
-    // We doen de y-as keer -1 omdat sdl vanuit de linker bovenhoek rekend
+    // We doen de y-as keer -1 omdat sdl vanuit de linker bovenhoek rekent
     // en dan is naar benden de plus richting en naar boven de negatieverichting.
     // Dit willen wij anderzom hebben, daarom doen we de y keer -1.
     float y = m.getNumber(1,0);
@@ -176,4 +141,28 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
            { zw },
            { w }
    }};
+}
+
+void CoordinateSystem::renderLineList(const std::vector<Line*>& lines) {
+    for(auto line : lines) {
+        Matrix lineStart { *line->start };
+        lineStart.pushOne();
+        Matrix lineEnd { *line->end };
+        lineEnd.pushOne();
+
+        Matrix multiplyLineStart = *multiplyMatrix * lineStart;
+        Matrix multiplyLineEnd =  *multiplyMatrix * lineEnd;
+
+        if(multiplyLineStart.getNumber(3,0) < 0 || multiplyLineEnd.getNumber(3,0) < 0) {
+            continue;
+        }
+
+        Matrix matrixLineStart = naberekening(multiplyLineStart);
+        Matrix matrixLineEnd = naberekening(multiplyLineEnd);
+
+        Vector3D pointOne {matrixLineStart.getNumber(0, 0), matrixLineStart.getNumber(1, 0), matrixLineStart.getNumber(2, 0)};
+        Vector3D pointTwo {matrixLineEnd.getNumber(0, 0), matrixLineEnd.getNumber(1, 0), matrixLineEnd.getNumber(2, 0)};
+
+        renderLine(pointOne, pointTwo);
+    }
 }

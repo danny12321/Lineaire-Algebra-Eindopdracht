@@ -15,14 +15,12 @@ Space::Space() : camera({{5, 5, 5},
     eventSystem.addEventHandler(getEventHandler());
 
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
+    objectManager.addObject<Cube>(new Cube());
     objectManager.addObject<Axis>(new Axis(new Vector3D{4, 0,0}, 255,0,0)); // x
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 4,0}, 0,255,0)); // y
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 0,4}, 0,0,255)); // z
     objectManager.doAddObjects();
 //    objects.emplace_back(std::make_unique<Jezus>());
-    objectManager.getObjects().at(0)->toOrigin();
-    objectManager.getObjects().at(0)->scale(0.1, 0.1, 0.1);
-    objectManager.getObjects().at(0)->translate(5,2,1);
 //    objectManager.getObjects().at(0)->rotateLocalAxis(45,45,45);
 //    objectManager.getObjects().at(0)->rotateLocalAxis(0,0,30);
 //    objectManager.getObjects().at(0)->rotateToOrigin();
@@ -46,6 +44,8 @@ void Space::run() {
         handleEvents();
 
         objectManager.update(eventSystem);
+
+        objectManager.collisionCheck();
 
         camera.update();
 

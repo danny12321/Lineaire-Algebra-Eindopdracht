@@ -26,7 +26,12 @@ Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager
 
     rotateX(90);
 
+    toOrigin();
+    scale(0.1, 0.1, 0.1);
+    translate(5,2,1);
+
     resetXyzAxis();
+    resetBouningBox();
 }
 
 void Spaceship::update(const EventSystem &system) {
@@ -62,4 +67,8 @@ void Spaceship::move() {
     Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
     Vector3D a = (normalVector - *canon[0]).getEenheidsvector();
     translate(a.getX() * velocity, a.getY() * velocity, a.getZ() * velocity);
+}
+
+void Spaceship::collide(Object3D &collider) {
+    std::cout << typeid(collider).name() << std::endl;
 }

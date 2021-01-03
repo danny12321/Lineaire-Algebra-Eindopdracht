@@ -16,6 +16,8 @@ public:
 
     void shoot();
 
+    void collide(Object3D &collider) override;
+
 private:
     void move();
     ObjectManager& objectManager;
