@@ -144,6 +144,8 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
 }
 
 void CoordinateSystem::renderLineList(const std::vector<Line*>& lines) {
+
+
     for(auto line : lines) {
         Matrix lineStart { *line->start };
         lineStart.pushOne();

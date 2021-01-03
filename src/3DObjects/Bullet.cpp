@@ -3,13 +3,10 @@
 //
 
 #include "Bullet.hpp"
+#include "Cube.hpp"
 
-void Bullet::update(const EventSystem &system) {
-    translate(velocity.getX(), velocity.getY(), velocity.getZ());
-}
 
-Bullet::Bullet(Vector3D position, float spaceShipVelocity, Vector3D rotation) {
-
+Bullet::Bullet(Vector3D position, float spaceShipVelocity, Vector3D rotation, ObjectManager& objectManager) : objectManager(objectManager) {
     this->setColor(255,0,0);
 
     points.push_back(new Vector3D{0,0,.1});
@@ -58,4 +55,16 @@ Bullet::Bullet(Vector3D position, float spaceShipVelocity, Vector3D rotation) {
 //    rotateY(hoekxz);
 
     translate(position.getX(), position.getY(), position.getZ());
+    resetXyzAxis();
+}
+
+void Bullet::update(const EventSystem &system) {
+        translate(velocity.getX(), velocity.getY(), velocity.getZ());
+}
+
+void Bullet::collide(Object3D &collider) {
+    if(typeid(collider).name() == std::string{ "class Cube" }) {
+        objectManager.removeObject(&collider);
+        objectManager.removeObject(this);
+    }
 }

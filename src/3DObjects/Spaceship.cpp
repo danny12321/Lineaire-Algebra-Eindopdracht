@@ -53,13 +53,14 @@ void Spaceship::update(const EventSystem &system) {
     if(system.keyIsPressedOnce(SDLK_SPACE)) shoot();
     if(system.keyPressedThisUpdate(SDLK_h)) rotateToOrigin();
 
-move();
+    move();
+
 }
 
 void Spaceship::shoot() {
     Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
 
-    objectManager.addObject<Bullet>(new Bullet(*canon[0], velocity, normalVector));
+    objectManager.addObject<Bullet>(new Bullet(*canon[0], velocity, normalVector, objectManager));
 }
 
 void Spaceship::move() {
@@ -70,5 +71,5 @@ void Spaceship::move() {
 }
 
 void Spaceship::collide(Object3D &collider) {
-    std::cout << typeid(collider).name() << std::endl;
+//    std::cout << typeid(collider).name() << std::endl;
 }

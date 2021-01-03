@@ -16,10 +16,14 @@ public:
     void update(const EventSystem &system);
     void doAddObjects();
     void collisionCheck();
+
+    void removeObject(Object3D* object);
+    void doRemoveObjects();
 private:
     bool doObjectsCollide(Object3D& one, Object3D& two);
     std::vector<std::unique_ptr<Object3D>> objects;
     std::vector<std::unique_ptr<Object3D>> objectsToAdd;
+    std::vector<Object3D*> objectsToDelete;
 };
 
 #endif //LINAL_OBJECTMANAGER_HPP

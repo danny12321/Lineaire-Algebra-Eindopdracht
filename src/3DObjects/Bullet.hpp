@@ -6,16 +6,20 @@
 #define LINAL_BULLET_HPP
 
 #include "Object3D.hpp"
+#include "../ObjectManager.hpp"
 
 class Bullet : public Object3D {
 
 public:
-    Bullet(Vector3D position, float velocity, Vector3D rotation);
+    Bullet(Vector3D position, float velocity, Vector3D rotation, ObjectManager& objectManager);
     void update(const EventSystem &system) override;
+
+    void collide(Object3D &collider) override;
 
 private:
     Vector3D velocity {0,0,0};
-    float bulletSpeed = 1.0f;
+    ObjectManager& objectManager;
+    float bulletSpeed = .1f;
 };
 
 
