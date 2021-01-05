@@ -182,6 +182,10 @@ void Camera::update(const EventSystem &system) {
     if(system.keyIsPressed(SDLK_y)) lookUpDown(-1);
     if(system.keyIsPressed(SDLK_u)) lookUpDown(1);
 
+    auto mouseMotion = system.getMouseMotion();
+    lookSideways(mouseMotion.getX());
+    lookUpDown(mouseMotion.getY());
+
     if(followingObject == nullptr) {
         return;
     }

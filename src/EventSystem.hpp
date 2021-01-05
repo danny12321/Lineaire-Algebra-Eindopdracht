@@ -10,6 +10,7 @@
 #include <map>
 #include <vector>
 #include <functional>
+#include "Vector3D.hpp"
 
 class EventSystem {
 public:
@@ -36,12 +37,16 @@ public:
         customHandlers.emplace_back(handler);
     };
 
+    [[nodiscard]] Vector3D getMouseMotion() const { return mouseMotion; }
+
 private:
 
     SDL_Event e;
     std::map<SDL_Keycode, bool> keyPressed;
     std::map<SDL_Keycode, bool> prevKeyPressed;
     std::map<SDL_Keycode, bool> keyPressedThisUpdateList;
+
+    Vector3D mouseMotion { 0, 0, 0};
 
     std::vector<std::function<void(const SDL_Event&)>> customHandlers;
 };
