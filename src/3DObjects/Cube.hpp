@@ -13,6 +13,10 @@ public:
     Cube();
 
     void update(const EventSystem &system) override;
+
+private:
+    int updateCount = 0;
+    bool growBigger = false;
 };
 
 

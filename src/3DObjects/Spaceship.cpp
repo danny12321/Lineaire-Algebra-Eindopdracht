@@ -64,10 +64,13 @@ void Spaceship::shoot() {
 }
 
 void Spaceship::move() {
-    // Zelfde kant op als de kogel, als we een andere kant op willen moeten nog een driehoek maken.
-    Vector3D normalVector = getNormalVector(*canon[0], *canon[1], *canon[2]);
-    Vector3D a = (normalVector - *canon[0]).getEenheidsvector();
-    translate(a.getX() * velocity, a.getY() * velocity, a.getZ() * velocity);
+    if(velocity != 0) {
+        translateLocalZ(-velocity);
+        std::cout << velocity << std::endl;
+    }
+    if(velocity > -0.001 && velocity < 0.001) {
+        velocity = 0;
+    }
 }
 
 void Spaceship::collide(Object3D &collider) {

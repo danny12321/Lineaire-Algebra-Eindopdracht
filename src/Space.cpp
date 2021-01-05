@@ -28,8 +28,6 @@ Space::Space() : camera({{5, 5, 5},
 //    objectManager.getObjects().at(0)->rotateLocalAxis(45,10,45);
 
 //    camera.followObject(*objectManager.getObjects().at(0), new Vector3D {20,30,50});
-
-
 }
 
 Space::~Space() {

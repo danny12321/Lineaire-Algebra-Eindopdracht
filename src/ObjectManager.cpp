@@ -36,7 +36,7 @@ void ObjectManager::collisionCheck() {
 bool ObjectManager::doObjectsCollide(Object3D &a, Object3D &b) {
     return (a.getNegativeX() <= b.getPositiveX() && a.getPositiveX() >= b.getNegativeX()) &&
            (a.getNegativeY() <= b.getPositiveY() && a.getPositiveY() >= b.getNegativeY()) &&
-           (a.getNegativeZ() <= b.getPositiveZ() && a.getPositiveX() >= b.getNegativeZ());
+           (a.getNegativeZ() <= b.getPositiveZ() && a.getPositiveZ() >= b.getNegativeZ());
 }
 
 void ObjectManager::removeObject(Object3D *object) {

@@ -337,3 +337,19 @@ void Object3D::resetBouningBox() {
     boundingBoxLines.push_back(new Line {boundingBox[2], boundingBox[6]});
     boundingBoxLines.push_back(new Line {boundingBox[3], boundingBox[7]});
 }
+
+void Object3D::translateLocalX(float distance) {
+    Vector3D direction = (*localXyzPoints[1] - *localXyzPoints[0]).getEenheidsvector();
+
+    translate(direction.getX() * distance, direction.getY() * distance, direction.getZ() * distance);
+}
+void Object3D::translateLocalY(float distance) {
+    Vector3D direction = (*localXyzPoints[2] - *localXyzPoints[0]).getEenheidsvector();
+
+    translate(direction.getX() * distance, direction.getY() * distance, direction.getZ() * distance);
+}
+void Object3D::translateLocalZ(float distance) {
+    Vector3D direction = (*localXyzPoints[3] - *localXyzPoints[0]).getEenheidsvector();
+
+    translate(direction.getX() * distance, direction.getY() * distance, direction.getZ() * distance);
+}

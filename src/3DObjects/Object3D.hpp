@@ -22,6 +22,10 @@ public:
 
     void translate(float x, float y, float z);
 
+    void translateLocalX(float distance);
+    void translateLocalY(float distance);
+    void translateLocalZ(float distance);
+
     void rotateAroundOriginX(float deg);
     void rotateAroundOriginY(float deg);
     void rotateAroundOriginZ(float deg);

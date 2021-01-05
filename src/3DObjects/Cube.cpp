@@ -44,10 +44,24 @@ Cube::Cube() {
     resetXyzAxis();
     rotateLocalX(45);
     rotateLocalY(45);
+    translate(-3,0,-1);
     resetBouningBox();
 }
 
 void Cube::update(const EventSystem &system) {
+    if(growBigger) {
+        updateCount++;
+        scale(0.96, 0.96, 0.96);
+        if(updateCount > 30) {
+            growBigger = false;
+        }
+    } else {
+        updateCount--;
+        scale(1.04, 1.04, 1.04);
+        if(updateCount < 0) {
+            growBigger = true;
+        }
+    }
 }
 
 
