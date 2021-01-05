@@ -61,7 +61,7 @@ public:
 
     void lookUpDown(float deg);
 
-    void followObject(Object3D& object, Vector3D* offset);
+    void followObject(Object3D* object, Vector3D* offset);
 
     void update(const EventSystem &system);
 private:

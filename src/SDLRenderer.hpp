@@ -10,6 +10,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "Vector3D.hpp"
 
 class SDLRenderer {
 public:
@@ -17,7 +18,7 @@ public:
 
     void close();
 
-    bool isRunning();
+    bool isRunning() const;
 
     void clearScreen();
 
@@ -25,19 +26,21 @@ public:
 
     void drawLine(int x1, int y1, int x2, int y2);
 
-    void delay();
+    void delay() const;
 
     void setDrawColor(int r, int g, int b, int a);
 
-    [[nodiscard]] int getScreenWidth() const { return SCREEN_WIDTH; }
-
-    [[nodiscard]] int getScreenHeight() const { return SCREEN_HEIGHT; }
+    [[nodiscard]] Vector3D getScreenSize() const {
+        int w, h;
+        SDL_GetWindowSize(window,&w,&h);
+        return {(float)w, (float)h, 0};
+    }
 
     void quitApp() { quit = true; }
-private:
-    int SCREEN_WIDTH = 1920;
-    int SCREEN_HEIGHT = 1080;
 
+    void toggleEndlessCursor();
+
+private:
     const int fps = 100;
     const int waitingTimeForFrame = 1000 / fps;
 
@@ -46,6 +49,8 @@ private:
     SDL_Event e;
 
     bool quit = false;
+
+    bool endlessCursor = true;
 };
 
 

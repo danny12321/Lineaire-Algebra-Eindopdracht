@@ -12,6 +12,7 @@ void EventSystem::handleEvents() {
     mouseMotion.setX(0);
     mouseMotion.setY(0);
 
+    mouseWheel.setX(0);
     mouseWheel.setY(0);
 
     while (SDL_PollEvent(&e) != 0) {
@@ -27,6 +28,7 @@ void EventSystem::handleEvents() {
         }
 
         if(e.type == SDL_MOUSEWHEEL) {
+            mouseWheel.setX(e.wheel.x);
             mouseWheel.setY(e.wheel.y);
         }
     }

@@ -10,8 +10,9 @@
 #include "3DObjects/Axis.hpp"
 
 Space::Space() : camera({{5, 5, 5},
-                         {0, 0, 0}}), coordinateSystem({sdlRenderer, 1920, 1080}) {
+                         {0, 0, 0}}), coordinateSystem({sdlRenderer, eventSystem}) {
     sdlRenderer.init();
+    coordinateSystem.init(eventSystem);
     eventSystem.addEventHandler(getEventHandler());
 
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
@@ -27,7 +28,7 @@ Space::Space() : camera({{5, 5, 5},
 //    objectManager.getObjects().at(0)->rotateToOrigin();
 //    objectManager.getObjects().at(0)->rotateLocalAxis(45,10,45);
 
-//    camera.followObject(*objectManager.getObjects().at(0), new Vector3D {20,30,50});
+//    camera.followObject(objectManager.getObjects().at(0).get(), new Vector3D {20,30,50});
 }
 
 Space::~Space() {
@@ -44,6 +45,8 @@ void Space::run() {
 
         objectManager.collisionCheck();
 
+        handleEvents();
+
         camera.update(eventSystem);
 
         render();
@@ -52,8 +55,18 @@ void Space::run() {
     }
 }
 
-void Space::update() {
+void Space::handleEvents() {
+    if(eventSystem.keyPressedThisUpdate(SDLK_ESCAPE))
+        this->sdlRenderer.toggleEndlessCursor();
 
+    if(eventSystem.keyPressedThisUpdate(SDLK_1))
+        camera.followObject(objectManager.getObjects().at(0).get(), new Vector3D {1,1,1});
+
+    if(eventSystem.keyPressedThisUpdate(SDLK_2))
+        camera.followObject(objectManager.getObjects().at(0).get(), new Vector3D {20,30,50});
+
+    if(eventSystem.keyPressedThisUpdate(SDLK_0))
+        camera.followObject(nullptr, new Vector3D {20,30,50});
 }
 
 void Space::render() {

@@ -10,11 +10,12 @@
 #include "Vector3D.hpp"
 #include "3DObjects/Object3D.hpp"
 #include "Matrix.hpp"
+#include "EventSystem.hpp"
 
 class CoordinateSystem {
 public:
-    CoordinateSystem(SDLRenderer& sdlRenderer, int width, int height) :
-            sdlRenderer(sdlRenderer), width(width), height(height) {};
+    CoordinateSystem(SDLRenderer& sdlRenderer, EventSystem &system) :
+            sdlRenderer(sdlRenderer) {};
 
 
     void renderVector(Vector3D& vector, int xStart, int yStart);
@@ -34,6 +35,9 @@ public:
     void setMultiplyMatrix(Matrix m) { multiplyMatrix = std::make_unique<Matrix>(m); };
 
     void renderLineList(const std::vector<Line*>& lines);
+
+    void init(EventSystem& system);
+
 private:
     std::unique_ptr<Matrix> multiplyMatrix;
     int maxXLineSize = 500;
@@ -42,12 +46,15 @@ private:
     int minYLineSize = 10;
     int xLineSize = 50;
     int yLineSize = 50;
-    int width = 0;
-    int height = 0;
 
     SDLRenderer& sdlRenderer;
-    int xMiddle = width / 2;
-    int yMiddle = height / 2;
+
+    int xMiddle = 1920 / 2;
+    int yMiddle = 1080 / 2;
+
+    std::function<void(const SDL_Event &)> getEventHandler();
+
+    void setMiddle();
 };
 
 

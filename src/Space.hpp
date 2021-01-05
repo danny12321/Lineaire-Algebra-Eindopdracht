@@ -19,7 +19,7 @@ public:
 
     void run();
 
-    void update();
+    void handleEvents();
 
 private:
     void render();

@@ -163,8 +163,8 @@ void Camera::handleEvents(const EventSystem &system) {
     if (system.keyIsPressed(SDLK_f)) rotateCameraZ(-1);
 }
 
-void Camera::followObject(Object3D &object, Vector3D* offset) {
-    followingObject = &object;
+void Camera::followObject(Object3D* object, Vector3D* offset) {
+    followingObject = object;
     followingOffset = offset;
 }
 
