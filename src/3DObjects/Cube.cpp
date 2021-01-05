@@ -49,16 +49,16 @@ Cube::Cube() {
 }
 
 void Cube::update(const EventSystem &system) {
+    float size = getPositiveX() - getNegativeX();
+
     if(growBigger) {
-        updateCount++;
-        scale(0.96, 0.96, 0.96);
-        if(updateCount > 30) {
+        scale(1.02, 1.02, 1.02);
+        if(size > 3) {
             growBigger = false;
         }
     } else {
-        updateCount--;
-        scale(1.04, 1.04, 1.04);
-        if(updateCount < 0) {
+        scale(0.98, 0.98, 0.98);
+        if(size < 2) {
             growBigger = true;
         }
     }

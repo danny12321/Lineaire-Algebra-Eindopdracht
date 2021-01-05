@@ -68,6 +68,12 @@ public:
     void resetXyzAxis();
     void resetBouningBox();
 
+    void setShowBoundingBox(bool show) { showBoundingBox = show; }
+    void setShowLocalXyz(bool show) { showLocalXyz = show; }
+
+    [[nodiscard]] bool getShowBoundingBox() const { return showBoundingBox; }
+    [[nodiscard]] bool getShowLocalXyz() const { return showLocalXyz; }
+
     [[nodiscard]] float getPositiveX() const { return positiveX; }
     [[nodiscard]] float getPositiveY() const { return positiveY; }
     [[nodiscard]] float getPositiveZ() const { return positiveZ; }
@@ -92,6 +98,9 @@ private:
     float negativeY = 0;
     float positiveZ = 0;
     float negativeZ = 0;
+
+    bool showBoundingBox = false;
+    bool showLocalXyz = false;
 
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);

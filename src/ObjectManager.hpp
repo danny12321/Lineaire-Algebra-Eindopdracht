@@ -24,6 +24,9 @@ private:
     std::vector<std::unique_ptr<Object3D>> objects;
     std::vector<std::unique_ptr<Object3D>> objectsToAdd;
     std::vector<Object3D*> objectsToDelete;
+
+    bool showBoundingBoxes = false;
+    bool showLocalXyz = false;
 };
 
 #endif //LINAL_OBJECTMANAGER_HPP

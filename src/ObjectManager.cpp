@@ -3,8 +3,23 @@
 //
 
 #include "ObjectManager.hpp"
+#include "EventSystem.hpp"
 
 void ObjectManager::update(const EventSystem &system) {
+
+    if(system.keyIsPressedOnce(SDLK_b)) {
+        showBoundingBoxes = !showBoundingBoxes;
+        for (auto &object : objects) {
+            object->setShowBoundingBox(showBoundingBoxes);
+        }
+    }
+
+    if(system.keyIsPressedOnce(SDLK_l)) {
+        showLocalXyz = !showLocalXyz;
+        for (auto &object : objects) {
+            object->setShowLocalXyz(showLocalXyz);
+        }
+    }
 
     for (auto &object : objects) {
         object->update(system);

@@ -4,30 +4,6 @@
 
 #include "EventSystem.hpp"
 
-
-//void EventSystem::doEvents(CoordinateSystem &coordinateSystem, SDLRenderer &sdlRenderer, Camera &camera) {
-//    while (SDL_PollEvent(&e) != 0) {
-//
-//        int x, y;
-////        SDL_GetMouseState(&x, &y);
-//
-//
-//        //User requests quit
-//        if (e.type == SDL_QUIT) {
-//            sdlRenderer.quitApp();
-//        }
-//
-//        if (e.type == SDL_MOUSEWHEEL) {
-//            if (e.wheel.y > 0) // scroll up
-//                camera.decreaseFov();
-//            else if (e.wheel.y < 0) // scroll down
-//                camera.increaseFov();
-//            std::cout << camera.getFov() << std::endl;
-//        }
-
-//    }
-//}
-
 void EventSystem::handleEvents() {
     prevKeyPressed = keyPressed;
     keyPressedThisUpdateList.clear();

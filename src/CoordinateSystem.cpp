@@ -87,13 +87,13 @@ void CoordinateSystem::minusXYLineSize(int size) {
 void CoordinateSystem::renderObject(const Object3D &object) {
 
     auto xyzLines = object.getXyzAxisLines();
-    if(!xyzLines.empty()) {
+    if(!xyzLines.empty() && object.getShowLocalXyz()) {
         sdlRenderer.setDrawColor(255, 0, 0, 255);
         renderLineList(xyzLines);
     }
 
     auto boundingBoxLines = object.getBoundingBox();
-    if(!boundingBoxLines.empty()) {
+    if(!boundingBoxLines.empty() && object.getShowBoundingBox()) {
         sdlRenderer.setDrawColor(0, 255, 0, 255);
         renderLineList(boundingBoxLines);
     }
