@@ -66,7 +66,6 @@ void Spaceship::shoot() {
 void Spaceship::move() {
     if(velocity != 0) {
         translateLocalZ(-velocity);
-        std::cout << velocity << std::endl;
     }
     if(velocity > -0.001 && velocity < 0.001) {
         velocity = 0;
