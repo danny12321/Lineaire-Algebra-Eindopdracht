@@ -54,9 +54,16 @@ public:
 
     void handleEvents(const EventSystem &system);
 
+    void goForward(float distance);
+    void goSideways(float distance);
+
+    void lookSideways(float deg);
+
+    void lookUpDown(float deg);
+
     void followObject(Object3D& object, Vector3D* offset);
 
-    void update();
+    void update(const EventSystem &system);
 private:
     Vector3D eye;
     Vector3D lookat;

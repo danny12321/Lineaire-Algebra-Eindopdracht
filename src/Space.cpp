@@ -40,13 +40,11 @@ void Space::run() {
 
         eventSystem.handleEvents();
 
-        handleEvents();
-
         objectManager.update(eventSystem);
 
         objectManager.collisionCheck();
 
-        camera.update();
+        camera.update(eventSystem);
 
         render();
 
@@ -62,19 +60,12 @@ void Space::render() {
     Matrix multiplyMatrix = camera.getProjectionMatrix() * camera.getToOriginMatrix();
     coordinateSystem.setMultiplyMatrix(multiplyMatrix);
 
-
-
     for (const auto &object : objectManager.getObjects())
         coordinateSystem.renderObject(*object);
 
     sdlRenderer.setDrawColor(0, 0, 0, 255);
 
     sdlRenderer.render();
-
-}
-
-void Space::handleEvents() {
-    camera.handleEvents(eventSystem);
 }
 
 std::function<void(const SDL_Event &)> Space::getEventHandler() {

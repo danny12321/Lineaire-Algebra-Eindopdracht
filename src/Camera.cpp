@@ -168,7 +168,20 @@ void Camera::followObject(Object3D &object, Vector3D* offset) {
     followingOffset = offset;
 }
 
-void Camera::update() {
+void Camera::update(const EventSystem &system) {
+
+    if(system.keyIsPressed(SDLK_t)) goForward(-.3);
+    if(system.keyIsPressed(SDLK_g)) goForward(.3);
+
+    if(system.keyIsPressed(SDLK_f)) goSideways(-.3);
+    if(system.keyIsPressed(SDLK_h)) goSideways(.3);
+
+    if(system.keyIsPressed(SDLK_j)) lookSideways(-1);
+    if(system.keyIsPressed(SDLK_k)) lookSideways(1);
+
+    if(system.keyIsPressed(SDLK_y)) lookUpDown(-1);
+    if(system.keyIsPressed(SDLK_u)) lookUpDown(1);
+
     if(followingObject == nullptr) {
         return;
     }
@@ -182,4 +195,80 @@ void Camera::update() {
     eye.setX(middle.getX() + followingOffset->getX());
     eye.setY(middle.getY() + followingOffset->getY());
     eye.setZ(middle.getZ() + followingOffset->getZ());
+}
+
+void Camera::goForward(float distance) {
+    Vector3D direction = getDirection();
+
+    eye.setX(eye.getX() + (direction.getX() * distance));
+    eye.setY(eye.getY() + (direction.getY()* distance));
+    eye.setZ(eye.getZ() + (direction.getZ() * distance));
+
+    lookat.setX(lookat.getX() + (direction.getX() * distance));
+    lookat.setY(lookat.getY() + (direction.getY() * distance));
+    lookat.setZ(lookat.getZ() + (direction.getZ() * distance));
+}
+
+void Camera::goSideways(float distance) {
+    Vector3D direction = getRight();
+
+    eye.setX(eye.getX() + (direction.getX() * distance));
+    eye.setY(eye.getY() + (direction.getY()* distance));
+    eye.setZ(eye.getZ() + (direction.getZ() * distance));
+
+    lookat.setX(lookat.getX() + (direction.getX() * distance));
+    lookat.setY(lookat.getY() + (direction.getY() * distance));
+    lookat.setZ(lookat.getZ() + (direction.getZ() * distance));
+}
+
+void Camera::lookSideways(float deg) {
+    Vector3D middle = eye;
+    Vector3D rotationPoint = Vector3D{0,1,0};
+    Matrix localXMatrix {rotationPoint};
+
+    Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
+    Matrix m5 = Matrix::getRotationMatrixM5(localXMatrix);
+    Matrix m4 = Matrix::getRotationMatrixM4(localXMatrix);
+    Matrix m3 = Matrix::getRotationMatrixX(deg);
+    Matrix m2 = Matrix::getRotationMatrixM2(localXMatrix);
+    Matrix m1 = Matrix::getRotationMatrixM1(localXMatrix);
+    Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
+    Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
+
+//    Matrix meye = result * Matrix{{{eye.getX()}, {eye.getY()}, {eye.getZ()}, {1}}};
+    Matrix mlookat = result * Matrix{{{lookat.getX()}, {lookat.getY()}, {lookat.getZ()}, {1}}};
+
+//    eye.setX(meye.getNumber(0,0));
+//    eye.setY(meye.getNumber(1,0));
+//    eye.setZ(meye.getNumber(2,0));
+
+    lookat.setX(mlookat.getNumber(0,0));
+    lookat.setY(mlookat.getNumber(1,0));
+    lookat.setZ(mlookat.getNumber(2,0));
+}
+
+void Camera::lookUpDown(float deg) {
+    Vector3D middle = eye;
+    Vector3D rotationPoint = getRight();
+    Matrix localXMatrix {rotationPoint};
+
+    Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
+    Matrix m5 = Matrix::getRotationMatrixM5(localXMatrix);
+    Matrix m4 = Matrix::getRotationMatrixM4(localXMatrix);
+    Matrix m3 = Matrix::getRotationMatrixX(deg);
+    Matrix m2 = Matrix::getRotationMatrixM2(localXMatrix);
+    Matrix m1 = Matrix::getRotationMatrixM1(localXMatrix);
+    Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
+    Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
+
+//    Matrix meye = result * Matrix{{{eye.getX()}, {eye.getY()}, {eye.getZ()}, {1}}};
+    Matrix mlookat = result * Matrix{{{lookat.getX()}, {lookat.getY()}, {lookat.getZ()}, {1}}};
+
+//    eye.setX(meye.getNumber(0,0));
+//    eye.setY(meye.getNumber(1,0));
+//    eye.setZ(meye.getNumber(2,0));
+
+    lookat.setX(mlookat.getNumber(0,0));
+    lookat.setY(mlookat.getNumber(1,0));
+    lookat.setZ(mlookat.getNumber(2,0));
 }

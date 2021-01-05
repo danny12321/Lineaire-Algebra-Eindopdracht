@@ -31,6 +31,8 @@ public:
     float getLength() const;
     Vector3D getEenheidsvector();
 
+    Vector3D getNormalVector(const Vector3D& v1, const Vector3D& v2);
+
     void setX(float x) { this->x = x; };
     void setY(float y) { this->y = y; };
     void setZ(float z) { this->z = z; };
