@@ -12,6 +12,8 @@ void EventSystem::handleEvents() {
     mouseMotion.setX(0);
     mouseMotion.setY(0);
 
+    mouseWheel.setY(0);
+
     while (SDL_PollEvent(&e) != 0) {
         if (e.type == SDL_KEYDOWN) {
             keyPressed[e.key.keysym.sym] = true;
@@ -22,6 +24,10 @@ void EventSystem::handleEvents() {
         if(e.type == SDL_MOUSEMOTION) {
             mouseMotion.setX(e.motion.xrel);
             mouseMotion.setY(e.motion.yrel);
+        }
+
+        if(e.type == SDL_MOUSEWHEEL) {
+            mouseWheel.setY(e.wheel.y);
         }
     }
 

@@ -13,10 +13,9 @@
 
 class CoordinateSystem {
 public:
-    CoordinateSystem(SDLRenderer& sdlRenderer, int xLineSize, int yLineSize, int x, int y, int width, int height, int xAxis, int yAxis) :
-            sdlRenderer(sdlRenderer), xLineSize(xLineSize), yLineSize(yLineSize), x(x), y(y), width(width), height(height), xAxis(xAxis), yAxis(yAxis) {};
+    CoordinateSystem(SDLRenderer& sdlRenderer, int width, int height) :
+            sdlRenderer(sdlRenderer), width(width), height(height) {};
 
-    void drawCoordinateSystem();
 
     void renderVector(Vector3D& vector, int xStart, int yStart);
 
@@ -25,8 +24,6 @@ public:
 
     void setMiddleX(int x) { xMiddle = x; }
     void setMiddleY(int y) { yMiddle = y; }
-
-//    void drawVectorList(Vector2DGroup vlist);
 
     void renderObject(const Object3D& object);
 
@@ -45,18 +42,12 @@ private:
     int minYLineSize = 10;
     int xLineSize = 50;
     int yLineSize = 50;
-    int x = 0;
-    int y = 0;
     int width = 0;
     int height = 0;
-    int xAxis = 0;
-    int yAxis = 1;
 
     SDLRenderer& sdlRenderer;
     int xMiddle = width / 2;
     int yMiddle = height / 2;
-
-    bool isOffScreen(float x, float y);
 };
 
 

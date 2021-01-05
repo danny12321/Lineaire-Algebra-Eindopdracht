@@ -38,6 +38,7 @@ public:
     };
 
     [[nodiscard]] Vector3D getMouseMotion() const { return mouseMotion; }
+    [[nodiscard]] Vector3D getMouseWheel() const { return mouseWheel; }
 
 private:
 
@@ -47,6 +48,7 @@ private:
     std::map<SDL_Keycode, bool> keyPressedThisUpdateList;
 
     Vector3D mouseMotion { 0, 0, 0};
+    Vector3D mouseWheel { 0, 0, 0};
 
     std::vector<std::function<void(const SDL_Event&)>> customHandlers;
 };

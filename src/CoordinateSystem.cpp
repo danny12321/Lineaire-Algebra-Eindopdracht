@@ -4,46 +4,6 @@
 
 #include "CoordinateSystem.hpp"
 
-void CoordinateSystem::drawCoordinateSystem() {
-    xMiddle = (width / 2) + x;
-    yMiddle = (height / 2) + y;
-
-    sdlRenderer.setDrawColor(220,220, 220,255);
-
-    // create x positive lines
-    int xPos = xMiddle;
-    while(xPos + xLineSize < width + x) {
-        xPos += xLineSize;
-        sdlRenderer.drawLine(xPos, y, xPos, height + y);
-    }
-
-    // create x negative lines
-    xPos = xMiddle;
-    while(xPos - xLineSize > x) {
-        xPos -= xLineSize;
-        sdlRenderer.drawLine(xPos, y, xPos, height + y);
-    }
-
-    // create y positive lines
-    int yPos = yMiddle;
-    while(yPos - yLineSize > y) {
-        yPos -= yLineSize;
-        sdlRenderer.drawLine(x, yPos, width + x, yPos);
-    }
-
-    // create y positive lines
-    yPos = yMiddle;
-    while(yPos + yLineSize < height + y) {
-        yPos += yLineSize;
-        sdlRenderer.drawLine(x, yPos, width + x, yPos);
-    }
-
-    // Create X and Y axis
-    sdlRenderer.setDrawColor(0,0,255,255);
-    sdlRenderer.drawLine(xMiddle, y, xMiddle, height + y);
-    sdlRenderer.drawLine(x, yMiddle, width + x, yMiddle);
-}
-
 void CoordinateSystem::renderVector(Vector3D& vector, int xStart, int yStart) {
     sdlRenderer.drawLine(xMiddle + (xLineSize * xStart),
                          yMiddle + (yLineSize * (yStart * -1)),
@@ -52,22 +12,10 @@ void CoordinateSystem::renderVector(Vector3D& vector, int xStart, int yStart) {
 }
 
 void CoordinateSystem::renderLine(Vector3D& v1, Vector3D& v2) {
-//    if(!isOffScreen(v1.getX(), v1.getY())) {
     sdlRenderer.drawLine(xMiddle + (xLineSize * v1.getX()),
                          yMiddle + (yLineSize * (v1.getY() * -1)),
                          xMiddle + (xLineSize * v2.getX()),
                          yMiddle + (yLineSize * (v2.getY() * -1)));
-//    }
-}
-
-bool CoordinateSystem::isOffScreen(float x, float y) {
-    if(xMiddle + (xLineSize * x) > width + this->x || xMiddle + (xLineSize * x) < this->x) {
-        return true;
-    }
-    if(yMiddle + (yLineSize * (y * -1)) > height + this->y || yMiddle + (yLineSize * (y * -1)) < this->y) {
-        return true;
-    }
-    return false;
 }
 
 void CoordinateSystem::plusXYLineSize(int size) {
@@ -103,8 +51,8 @@ void CoordinateSystem::renderObject(const Object3D &object) {
 }
 
 Matrix CoordinateSystem::naberekening(const Matrix& m) {
-    float screenXHalf = (float)sdlRenderer.getScreenWidth() / 2;
-    float screenYHalf = (float)sdlRenderer.getScreenHeight() / 2;
+//    float screenXHalf = (float)sdlRenderer.getScreenWidth() / 2;
+//    float screenYHalf = (float)sdlRenderer.getScreenHeight() / 2;
 
     float x = m.getNumber(0,0);
     // Ultra comment!
@@ -135,17 +83,15 @@ Matrix CoordinateSystem::naberekening(const Matrix& m) {
            { 1 }
     }};
 
-    return Matrix {{
-           { screenXHalf + ((xw / 2) * screenXHalf) },
-           { screenYHalf + ((yw / 2) * screenYHalf) },
-           { zw },
-           { w }
-   }};
+//    return Matrix {{
+//           { screenXHalf + ((xw / 2) * screenXHalf) },
+//           { screenYHalf + ((yw / 2) * screenYHalf) },
+//           { zw },
+//           { w }
+//   }};
 }
 
 void CoordinateSystem::renderLineList(const std::vector<Line*>& lines) {
-
-
     for(auto line : lines) {
         Matrix lineStart { *line->start };
         lineStart.pushOne();

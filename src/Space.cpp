@@ -10,7 +10,7 @@
 #include "3DObjects/Axis.hpp"
 
 Space::Space() : camera({{5, 5, 5},
-                         {0, 0, 0}}), coordinateSystem({sdlRenderer, 50, 50, 0, 0, 1280, 720, 0, 1}) {
+                         {0, 0, 0}}), coordinateSystem({sdlRenderer, 1920, 1080}) {
     sdlRenderer.init();
     eventSystem.addEventHandler(getEventHandler());
 

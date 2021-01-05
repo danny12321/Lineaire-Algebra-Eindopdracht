@@ -186,6 +186,13 @@ void Camera::update(const EventSystem &system) {
     lookSideways(mouseMotion.getX());
     lookUpDown(mouseMotion.getY());
 
+    auto mouseWheel = system.getMouseWheel();
+    if(mouseWheel.getY() > 0) {
+        decreaseFov();
+    } else if(mouseWheel.getY() < 0) {
+        increaseFov();
+    }
+
     if(followingObject == nullptr) {
         return;
     }
