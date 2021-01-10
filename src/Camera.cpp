@@ -128,11 +128,14 @@ void Camera::update(const EventSystem &system) {
     if(system.keyIsPressed(SDLK_f)) goSideways(-.3);
     if(system.keyIsPressed(SDLK_h)) goSideways(.3);
 
-    if(system.keyIsPressed(SDLK_j)) lookSideways(-1);
-    if(system.keyIsPressed(SDLK_k)) lookSideways(1);
+    if(system.keyIsPressed(SDLK_UP)) goForward(-.3);
+    if(system.keyIsPressed(SDLK_DOWN)) goForward(.3);
 
-    if(system.keyIsPressed(SDLK_y)) lookUpDown(-1);
-    if(system.keyIsPressed(SDLK_u)) lookUpDown(1);
+    if(system.keyIsPressed(SDLK_LEFT)) goSideways(-.3);
+    if(system.keyIsPressed(SDLK_RIGHT)) goSideways(.3);
+
+    if(system.keyIsPressed(SDLK_PAGEUP)) translateRelative(0, 0.3, 0);
+    if(system.keyIsPressed(SDLK_PAGEDOWN)) translateRelative(0, -0.3, 0);
 
     auto mouseMotion = system.getMouseMotion();
     lookSideways(mouseMotion.getX());

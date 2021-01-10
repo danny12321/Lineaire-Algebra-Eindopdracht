@@ -22,6 +22,7 @@ private:
     void move();
     ObjectManager& objectManager;
     float velocity = 0.0f;
+    float drag = 0.01f;
     std::vector<Vector3D*> canon;
 };
 
