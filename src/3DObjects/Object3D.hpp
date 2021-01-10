@@ -42,6 +42,8 @@ public:
     void rotateLocalY(float deg);
     void rotateLocalZ(float deg);
 
+    void rotateLocal(Vector3D &rotationPoint, float deg);
+
     void rotateAxis(const Vector3D& v, float deg);
 
     void scale(float scaleX, float scaleY, float scaleZ);
