@@ -16,7 +16,7 @@ public:
 //    Matrix(float deg);
 
     float getNumber(int row, int col) const { return matrix[row][col]; }
-    int getRows() { return matrix.size(); }
+//    int getRows() { return matrix.size(); }
     void pushOne() { matrix.push_back({1}); }
 
     friend Matrix operator+(const Matrix& a, const Matrix& b);

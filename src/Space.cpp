@@ -21,14 +21,6 @@ Space::Space() : camera({{5, 5, 5},
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 4,0}, 0,255,0)); // y
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 0,4}, 0,0,255)); // z
     objectManager.doAddObjects();
-//    objectManager.getObjects().at(1)->translate(-2, 0, 0);
-//    objects.emplace_back(std::make_unique<Jezus>());
-//    objectManager.getObjects().at(0)->rotateLocalAxis(45,45,45);
-//    objectManager.getObjects().at(0)->rotateLocalAxis(0,0,30);
-//    objectManager.getObjects().at(0)->rotateToOrigin();
-//    objectManager.getObjects().at(0)->rotateLocalAxis(45,10,45);
-
-//    camera.followObject(objectManager.getObjects().at(0).get(), new Vector3D {20,30,50});
 }
 
 Space::~Space() {

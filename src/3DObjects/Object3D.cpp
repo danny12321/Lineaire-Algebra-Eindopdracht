@@ -62,7 +62,7 @@ void Object3D::updatePoints(const Matrix &m) {
         }
     }
 
-    resetBouningBox();
+    resetBoundingBox();
 }
 
 void Object3D::rotateX(float deg) {
@@ -172,7 +172,7 @@ void Object3D::toOrigin() {
 }
 
 void Object3D::rotateLocalX(float deg) {
-    Vector3D middle = getMiddle();
+    Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[1] - middle;
     Matrix localXMatrix {rotationPoint};
 
@@ -189,7 +189,7 @@ void Object3D::rotateLocalX(float deg) {
 }
 
 void Object3D::rotateLocalY(float deg) {
-    Vector3D middle = getMiddle();
+    Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[2] - middle;
     Matrix localXMatrix {rotationPoint};
 
@@ -206,7 +206,7 @@ void Object3D::rotateLocalY(float deg) {
 }
 
 void Object3D::rotateLocalZ(float deg) {
-    Vector3D middle = getMiddle();
+    Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[3] - middle;
     Matrix localXMatrix {rotationPoint};
 
@@ -283,7 +283,7 @@ void Object3D::resetXyzAxis() {
     localXyzLines.push_back(new Line {localXyzPoints[0], localXyzPoints[3]});
 }
 
-void Object3D::resetBouningBox() {
+void Object3D::resetBoundingBox() {
     const float maxFloat = 999999;
     const float minFloat = -999999;
     positiveX = minFloat;

@@ -19,7 +19,7 @@ public:
 private:
     Vector3D velocity {0,0,0};
     ObjectManager& objectManager;
-    float bulletSpeed = .1f;
+    float bulletSpeed = .5f;
 };
 
 

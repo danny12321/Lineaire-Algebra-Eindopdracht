@@ -66,7 +66,7 @@ public:
     Vector3D getMiddle();
 
     void resetXyzAxis();
-    void resetBouningBox();
+    void resetBoundingBox();
 
     void setShowBoundingBox(bool show) { showBoundingBox = show; }
     void setShowLocalXyz(bool show) { showLocalXyz = show; }

@@ -45,7 +45,7 @@ Cube::Cube() {
     rotateLocalX(45);
     rotateLocalY(45);
     translate(-3,0,-1);
-    resetBouningBox();
+    resetBoundingBox();
 }
 
 void Cube::update(const EventSystem &system) {

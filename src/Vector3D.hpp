@@ -37,8 +37,6 @@ public:
     void setY(float y) { this->y = y; };
     void setZ(float z) { this->z = z; };
 
-//    Matrix getMatrix1x2();
-//    Matrix getMatrix1x3();
 private:
     float x, y, z;
 };

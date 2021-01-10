@@ -18,14 +18,6 @@ Vector3D operator*(int scalair, const Vector3D &a) {
     return Vector3D {a.x * scalair, a.y * scalair, a.z * scalair};
 }
 
-//Vector3D Vector3D::getEenheidsvector() {
-////    return Vector3D(this->x / this->getLength(), this->y / this->getLength());
-//}
-//
-//float Vector3D::getLength() {
-////    return sqrt(pow(this->x, 2) + pow(this->y, 2));
-//}
-
 Vector3D operator*(const Vector3D &a, int scalair) {
     return Vector3D {a.x * scalair, a.y * scalair, a.z * scalair};
 }

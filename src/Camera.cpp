@@ -115,54 +115,6 @@ void Camera::translateRelative(float x, float y, float z) {
     lookat.setZ(lresult.getNumber(2, 0));
 }
 
-void Camera::rotateCameraRelativeY(float deg) {
-//    Matrix lookatMatrix {lookat};
-//    lookatMatrix.pushOne();
-//
-//    Matrix eyeMatrix {eye};
-//    eyeMatrix.pushOne();
-//
-//    Matrix translationToOrigin = Matrix::getTranslationMatrix(eye.getX(), eye.getY(), eye.getZ());
-//    Matrix m1 = Matrix::getRotationMatrixM1(lookatMatrix);
-//    Matrix m2 = Matrix::getRotationMatrixM2(lookatMatrix);
-//    Matrix rotation = Matrix::getRotationMatrixY(deg);
-//    Matrix m4 = Matrix::getRotationMatrixM4(lookatMatrix);
-//    Matrix m5 = Matrix::getRotationMatrixM5(lookatMatrix);
-//    Matrix translationBack = Matrix::getTranslationMatrix(-eye.getX(), -eye.getY(), -eye.getZ());
-//    Matrix result = (translationBack * m5 * m4 * rotation * m2 * m1 * translationToOrigin) * lookatMatrix;
-//
-//    lookat.setX(result.getNumber(0,0));
-//    lookat.setY(result.getNumber(1,0));
-//    lookat.setZ(result.getNumber(2,0));
-}
-
-void Camera::rotateCameraRelativeZ(float deg) {
-
-}
-
-void Camera::handleEvents(const EventSystem &system) {
-    if (system.keyIsPressed(SDLK_HOME)) fovy -= 1;
-    if (system.keyIsPressed(SDLK_END)) fovy += 1;
-
-
-    if (system.keyIsPressed(SDLK_LEFT)) setEyeX(eye.getX() - .1f);
-    if (system.keyIsPressed(SDLK_RIGHT)) setEyeX(eye.getX() + .1f);
-    if (system.keyIsPressed(SDLK_UP)) setEyeZ(eye.getZ() - .1f);
-    if (system.keyIsPressed(SDLK_DOWN)) setEyeZ(eye.getZ() + .1f);
-    if (system.keyIsPressed(SDLK_PAGEUP)) setEyeY(eye.getY() + .1f);
-    if (system.keyIsPressed(SDLK_PAGEDOWN)) setEyeY(eye.getY() - .1f);
-//    if (system.keyIsPressed(SDLK_w)) translateRelative(-1, 0, 0);
-//    if (system.keyIsPressed(SDLK_s)) translateRelative(1, 0, 0);
-//    if (system.keyIsPressed(SDLK_a)) translateRelative(0, 0, 1);
-//    if (system.keyIsPressed(SDLK_d)) translateRelative(0, 0, -1);
-    if (system.keyIsPressed(SDLK_LSHIFT)) translateRelative(0, -1, 0);
-//    if (system.keyIsPressed(SDLK_SPACE)) translateRelative(0, 1, 0);
-//    if (system.keyIsPressed(SDLK_q)) rotateCameraY(-1);
-//    if (system.keyIsPressed(SDLK_e)) rotateCameraY(1);
-    if (system.keyIsPressed(SDLK_r)) rotateCameraZ(1);
-    if (system.keyIsPressed(SDLK_f)) rotateCameraZ(-1);
-}
-
 void Camera::followObject(Object3D* object, Vector3D* offset) {
     followingObject = object;
     followingOffset = offset;
@@ -246,12 +198,7 @@ void Camera::lookSideways(float deg) {
     Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
     Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
 
-//    Matrix meye = result * Matrix{{{eye.getX()}, {eye.getY()}, {eye.getZ()}, {1}}};
     Matrix mlookat = result * Matrix{{{lookat.getX()}, {lookat.getY()}, {lookat.getZ()}, {1}}};
-
-//    eye.setX(meye.getNumber(0,0));
-//    eye.setY(meye.getNumber(1,0));
-//    eye.setZ(meye.getNumber(2,0));
 
     lookat.setX(mlookat.getNumber(0,0));
     lookat.setY(mlookat.getNumber(1,0));
@@ -272,12 +219,7 @@ void Camera::lookUpDown(float deg) {
     Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
     Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
 
-//    Matrix meye = result * Matrix{{{eye.getX()}, {eye.getY()}, {eye.getZ()}, {1}}};
     Matrix mlookat = result * Matrix{{{lookat.getX()}, {lookat.getY()}, {lookat.getZ()}, {1}}};
-
-//    eye.setX(meye.getNumber(0,0));
-//    eye.setY(meye.getNumber(1,0));
-//    eye.setZ(meye.getNumber(2,0));
 
     lookat.setX(mlookat.getNumber(0,0));
     lookat.setY(mlookat.getNumber(1,0));

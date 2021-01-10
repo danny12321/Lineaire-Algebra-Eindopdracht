@@ -31,7 +31,7 @@ Spaceship::Spaceship(ObjectManager& objectManager) : objectManager(objectManager
     translate(5,2,1);
 
     resetXyzAxis();
-    resetBouningBox();
+    resetBoundingBox();
 }
 
 void Spaceship::update(const EventSystem &system) {
@@ -73,5 +73,7 @@ void Spaceship::move() {
 }
 
 void Spaceship::collide(Object3D &collider) {
-//    std::cout << typeid(collider).name() << std::endl;
+    if(typeid(collider).name() == std::string {"class Cube"}) {
+        objectManager.removeObject(this);
+    }
 }

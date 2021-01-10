@@ -51,9 +51,6 @@ void CoordinateSystem::renderObject(const Object3D &object) {
 }
 
 Matrix CoordinateSystem::naberekening(const Matrix &m) {
-//    auto screenSize = sdlRenderer.getScreenSize();
-//    float screenXHalf = screenSize.getX() / 2;
-//    float screenYHalf = screenSize.getY() / 2;
 
     float x = m.getNumber(0, 0);
     // Ultra comment!
@@ -83,13 +80,6 @@ Matrix CoordinateSystem::naberekening(const Matrix &m) {
                           {zw},
                           {1}
                   }};
-
-//    return Matrix {{
-//           { screenXHalf + ((xw / 2) * screenXHalf) },
-//           { screenYHalf + ((yw / 2) * screenYHalf) },
-//           { zw },
-//           { w }
-//   }};
 }
 
 void CoordinateSystem::renderLineList(const std::vector<Line *> &lines) {

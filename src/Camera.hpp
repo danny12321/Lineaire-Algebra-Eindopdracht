@@ -28,8 +28,6 @@ public:
 
     Matrix getProjectionMatrix();
 
-    Matrix naberekening(const Matrix &m);
-
     void increaseFov() { if (fovy < 179) fovy += 1; }
 
     void decreaseFov() { if (fovy > 1) fovy -= 1; }
@@ -47,12 +45,7 @@ public:
     void rotateCameraY(float deg);
     void rotateCameraZ(float deg);
 
-    void rotateCameraRelativeY(float deg);
-    void rotateCameraRelativeZ(float deg);
-
     void translateRelative(float x, float y, float z);
-
-    void handleEvents(const EventSystem &system);
 
     void goForward(float distance);
     void goSideways(float distance);

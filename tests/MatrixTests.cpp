@@ -130,7 +130,7 @@ TEST(MatrixTest, MultiplyMatrices3x3With3x3)
     ASSERT_EQ(result.getNumber(2, 2), 11);
 }
 
-TEST(MatrixTest, MultiplyMatricesWithDifferentRowAndColumnsThrowsError)
+TEST(MatrixTest, MultiplyMatricesWithDifferentRowsAndColumnsThrowsError)
 {
     // Arrange
     Matrix a {{
@@ -224,25 +224,6 @@ TEST(MatrixTest, RotateM2)
                 }};
 
     Matrix m1 = Matrix::getRotationMatrixM2(a);
-
-    Matrix result = m1 * a;
-
-    // Assert
-    EXPECT_TRUE((result.getNumber(0, 0) >= 12.7) && (result.getNumber(0, 0) <= 12.9));
-    EXPECT_TRUE((result.getNumber(1, 0) >= -0.01) && (result.getNumber(1, 0) <= 0.01));
-    ASSERT_EQ(result.getNumber(2, 0), 0);
-}
-
-TEST(MatrixTest, RotateM4)
-{
-    Matrix a = {{
-                        { 10 },
-                        { 8 },
-                        { 0 },
-                        { 1 }
-                }};
-
-    Matrix m1 = Matrix::getRotationMatrixM4(a);
 
     Matrix result = m1 * a;
 
