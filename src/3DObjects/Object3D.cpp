@@ -174,40 +174,26 @@ void Object3D::toOrigin() {
 void Object3D::rotateLocalX(float deg) {
     Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[1] - middle;
-    Matrix localXMatrix {rotationPoint};
 
-    Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
-    Matrix m5 = Matrix::getRotationMatrixM5(localXMatrix);
-    Matrix m4 = Matrix::getRotationMatrixM4(localXMatrix);
-    Matrix m3 = Matrix::getRotationMatrixX(deg);
-    Matrix m2 = Matrix::getRotationMatrixM2(localXMatrix);
-    Matrix m1 = Matrix::getRotationMatrixM1(localXMatrix);
-    Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
-    Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
-
-    updatePoints(result);
+    rotateLocal(rotationPoint, deg);
 }
 
 void Object3D::rotateLocalY(float deg) {
     Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[2] - middle;
-    Matrix localXMatrix {rotationPoint};
 
-    Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
-    Matrix m5 = Matrix::getRotationMatrixM5(localXMatrix);
-    Matrix m4 = Matrix::getRotationMatrixM4(localXMatrix);
-    Matrix m3 = Matrix::getRotationMatrixX(deg);
-    Matrix m2 = Matrix::getRotationMatrixM2(localXMatrix);
-    Matrix m1 = Matrix::getRotationMatrixM1(localXMatrix);
-    Matrix translationBack = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
-    Matrix result = translationBack * m5 * m4 * m3 * m2 * m1 * translation;
-
-    updatePoints(result);
+    rotateLocal(rotationPoint, deg);
 }
 
 void Object3D::rotateLocalZ(float deg) {
     Vector3D middle = *localXyzPoints[0];
     Vector3D rotationPoint = *localXyzPoints[3] - middle;
+
+    rotateLocal(rotationPoint, deg);
+}
+
+void Object3D::rotateLocal(Vector3D& rotationPoint, float deg) {
+    Vector3D middle = getMiddle();
     Matrix localXMatrix {rotationPoint};
 
     Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
