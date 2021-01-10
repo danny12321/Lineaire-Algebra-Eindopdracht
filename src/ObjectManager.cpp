@@ -2,6 +2,7 @@
 // Created by Thierry on 28-12-2020.
 //
 
+#include <algorithm>
 #include "ObjectManager.hpp"
 #include "EventSystem.hpp"
 
@@ -59,23 +60,14 @@ void ObjectManager::removeObject(Object3D *object) {
 }
 
 void ObjectManager::doRemoveObjects() {
-    // Moet eigenlijk in één loop gebeuren. Wordt nu 1 object per cycle verwijderd. Maar is wel priem zo.
+    auto it = std::remove_if(objects.begin(), objects.end(), [this](const std::unique_ptr<Object3D> &object) {
+        return std::any_of(objectsToDelete.begin(), objectsToDelete.end(), [&object](const Object3D* objectToDelete) {
+            return object.get() == objectToDelete;
+        });
+    });
 
-    if(!objectsToDelete.empty()) {
-
-        int indexToRemove = -1;
-        for(int i = 0; i < objects.size(); ++i) {
-            if(objects[i].get() == objectsToDelete[0]) {
-                indexToRemove = i;
-            }
-        }
-
-        if(indexToRemove != -1) {
-            objects.erase(objects.begin() + indexToRemove);
-            objectsToDelete.erase(objectsToDelete.begin());
-        }
-    }
-
+    objects.erase(it, objects.end());
+    objectsToDelete.clear();
 }
 
 
