@@ -53,10 +53,7 @@ void Spaceship::update(const EventSystem &system) {
 //    if (system.keyIsPressed(SDLK_x)) velocity += -0.1;
 
     if(system.keyIsPressedOnce(SDLK_SPACE)) shoot();
-    if(system.keyPressedThisUpdate(SDLK_h)) rotateToOrigin();
-
     move();
-
 }
 
 void Spaceship::shoot() {
@@ -71,7 +68,7 @@ void Spaceship::move() {
         // Ik weet dat er in de ruimte geen weerstand is van lucht. Maar is makkelijk voor de demonstratie!
         velocity -= drag;
     }
-    if(velocity > -0.001 && velocity < 0.001) {
+    if(velocity < 0) {
         velocity = 0;
     }
 }

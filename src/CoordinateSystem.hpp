@@ -17,15 +17,6 @@ public:
     CoordinateSystem(SDLRenderer& sdlRenderer, EventSystem &system) :
             sdlRenderer(sdlRenderer) {};
 
-
-    void renderVector(Vector3D& vector, int xStart, int yStart);
-
-    void plusXYLineSize(int size);
-    void minusXYLineSize(int size);
-
-    void setMiddleX(int x) { xMiddle = x; }
-    void setMiddleY(int y) { yMiddle = y; }
-
     void renderObject(const Object3D& object);
 
     Matrix naberekening(const Matrix& m);
@@ -40,10 +31,6 @@ public:
 
 private:
     std::unique_ptr<Matrix> multiplyMatrix;
-    int maxXLineSize = 500;
-    int maxYLineSize = 500;
-    int minXLineSize = 10;
-    int minYLineSize = 10;
     int xLineSize = 50;
     int yLineSize = 50;
 

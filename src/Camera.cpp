@@ -11,7 +11,6 @@ Vector3D Camera::getDirection() {
 Vector3D Camera::getRight() {
     Vector3D fakeUp{0, 1, 0};
     Vector3D dir = this->getDirection();
-    auto cross = fakeUp.crossProduct(dir);
     return (fakeUp.crossProduct(dir)).getEenheidsvector();
 }
 
@@ -121,12 +120,6 @@ void Camera::followObject(Object3D* object, Vector3D* offset) {
 }
 
 void Camera::update(const EventSystem &system) {
-
-    if(system.keyIsPressed(SDLK_t)) goForward(-.3);
-    if(system.keyIsPressed(SDLK_g)) goForward(.3);
-
-    if(system.keyIsPressed(SDLK_f)) goSideways(-.3);
-    if(system.keyIsPressed(SDLK_h)) goSideways(.3);
 
     if(system.keyIsPressed(SDLK_UP)) goForward(-.3);
     if(system.keyIsPressed(SDLK_DOWN)) goForward(.3);

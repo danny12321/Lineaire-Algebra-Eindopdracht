@@ -1,7 +1,3 @@
-//
-// Created by Danny on 24/12/2020.
-//
-
 #include "Space.hpp"
 #include "3DObjects/Cube.hpp"
 #include "3DObjects/Pyramid.hpp"
@@ -17,6 +13,7 @@ Space::Space() : camera({{5, 5, 5},
 
     objectManager.addObject<Spaceship>(new Spaceship(objectManager));
     objectManager.addObject<Cube>(new Cube());
+//    objectManager.addObject<Jezus>(new Jezus());
     objectManager.addObject<Axis>(new Axis(new Vector3D{4, 0,0}, 255,0,0)); // x
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 4,0}, 0,255,0)); // y
     objectManager.addObject<Axis>(new Axis(new Vector3D{0, 0,4}, 0,0,255)); // z

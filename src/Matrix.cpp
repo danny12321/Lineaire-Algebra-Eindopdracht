@@ -124,39 +124,6 @@ Matrix Matrix::getRotationMatrixZ(float deg) {
                    }};
 }
 
-Matrix Matrix::getRotationNegativeMatrixX(float deg) {
-    float rad = (deg / 180) * M_PI;
-
-    return Matrix {{
-                           { 1, 0, 0, 0 },
-                           { 0, std::cos(rad), -std::sin(rad), 0},
-                           { 0, std::sin(rad), std::cos(rad), 0 },
-                           { 0, 0, 0, 1}
-                   }};
-}
-
-Matrix Matrix::getRotationNegativeMatrixY(float deg) {
-    float rad = (deg / 180) * M_PI;
-
-    return Matrix {{
-                           { std::cos(rad), 0, -std::sin(rad), 0 },
-                           { 0, 1, 0, 0},
-                           { std::sin(rad), 0, std::cos(rad), 0 },
-                           { 0, 0, 0, 1}
-                   }};
-}
-
-Matrix Matrix::getRotationNegativeMatrixZ(float deg) {
-    float rad = (deg / 180) * M_PI;
-
-    return Matrix {{
-                           { std::cos(rad), std::sin(rad), 0, 0 },
-                           { -std::sin(rad), std::cos(rad), 0, 0},
-                           { 0, 0, 1, 0 },
-                           { 0, 0, 0, 1}
-                   }};
-}
-
 Matrix Matrix::getRotationMatrixM1(Matrix m) {
     float matrixX = m.getNumber(0,0);
     float matrixZ = m.getNumber(2,0);
@@ -243,25 +210,4 @@ Matrix Matrix::getScaleMatrix(float scaleX, float scaleY, float scaleZ) {
            { 0, 0, scaleZ, 0 },
            { 0, 0, 0, 1 }
    }};
-}
-
-float Matrix::getAngleX() {
-    return 0;
-}
-
-float Matrix::getAngleY() {
-    return 0;
-}
-
-// Werkt niet
-float Matrix::getAngleZ() {
-    float x = getNumber(0,0);
-    float y = getNumber(1,0);
-    float z = getNumber(2,0);
-    float xz = sqrt((x * x) + (z * z));
-    float xyz = sqrt((x * x) + (y * y) + (z * z));
-    float banaan = xz / xyz;
-    // Acos doet niet wat het moet doen
-    float hoek = acos(banaan);
-    return cos( sqrt((x * x) + (z * z)) / sqrt((x * x) + (y * y) + (z * z)) );
 }

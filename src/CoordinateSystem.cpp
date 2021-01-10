@@ -4,32 +4,11 @@
 
 #include "CoordinateSystem.hpp"
 
-void CoordinateSystem::renderVector(Vector3D &vector, int xStart, int yStart) {
-    sdlRenderer.drawLine(xMiddle + (xLineSize * xStart),
-                         yMiddle + (yLineSize * (yStart * -1)),
-                         xMiddle + (xLineSize * xStart) + (xLineSize * vector.getX()),
-                         yMiddle + (yLineSize * (yStart * -1)) + (yLineSize * (vector.getY() * -1)));
-}
-
 void CoordinateSystem::renderLine(Vector3D &v1, Vector3D &v2) {
     sdlRenderer.drawLine(xMiddle + (xLineSize * v1.getX()),
                          yMiddle + (yLineSize * (v1.getY() * -1)),
                          xMiddle + (xLineSize * v2.getX()),
                          yMiddle + (yLineSize * (v2.getY() * -1)));
-}
-
-void CoordinateSystem::plusXYLineSize(int size) {
-    if (xLineSize < maxXLineSize && yLineSize < maxYLineSize) {
-        xLineSize += size;
-        yLineSize += size;
-    }
-}
-
-void CoordinateSystem::minusXYLineSize(int size) {
-    if (xLineSize > minXLineSize && yLineSize > minYLineSize) {
-        xLineSize -= size;
-        yLineSize -= size;
-    }
 }
 
 void CoordinateSystem::renderObject(const Object3D &object) {

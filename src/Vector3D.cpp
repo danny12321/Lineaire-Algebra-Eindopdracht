@@ -43,13 +43,6 @@ float Vector3D::getLength() const {
     return sqrt((this->getX() * this->getX()) + (this->getY() * this->getY()) + (this->getZ() * this->getZ()));
 }
 
-float Vector3D::getAngleBetweenInRadians(const Vector3D &a) {
-    float dotproduct = this->dotProduct(a);
-    float lengthThis = this->getLength();
-    float lengthA = a.getLength();
-    return acos(dotproduct / (lengthThis * lengthA));
-}
-
 float Vector3D::getAngleBetween(const Vector3D &a) {
     float dotproduct = this->dotProduct(a);
     float lengthThis = this->getLength();
@@ -63,15 +56,4 @@ Vector3D Vector3D::getEenheidsvector() {
         return Vector3D(0,0,0);
     }
     return Vector3D(this->getX() / length, this->getY() / length, this->getZ() / length);
-}
-
-Vector3D Vector3D::getNormalVector(const Vector3D &v1, const Vector3D &v2) {
-    Vector3D newV1 = Vector3D{v1.getX() - this->getX(), v1.getY() - this->getY(), v1.getZ() - this->getZ() };
-    Vector3D newV2 = Vector3D{v2.getX() - this->getX(), v2.getY() - this->getY(), v2.getZ() - this->getZ() };
-    Vector3D normalVector = newV1.crossProduct(newV2);
-    normalVector.setX(normalVector.getX() + this->getX());
-    normalVector.setY(normalVector.getY() + this->getY());
-    normalVector.setZ(normalVector.getZ() + this->getZ());
-
-    return normalVector;
 }

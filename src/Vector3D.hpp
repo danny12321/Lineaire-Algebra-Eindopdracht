@@ -22,7 +22,6 @@ public:
     Vector3D crossProduct(const Vector3D& a);
     bool independentOf(const Vector3D& a);
     float getAngleBetween(const Vector3D& a);
-    float getAngleBetweenInRadians(const Vector3D& a);
 
     [[nodiscard]] float getX() const { return x; }
     [[nodiscard]] float getY() const { return y; }
@@ -30,8 +29,6 @@ public:
 
     float getLength() const;
     Vector3D getEenheidsvector();
-
-    Vector3D getNormalVector(const Vector3D& v1, const Vector3D& v2);
 
     void setX(float x) { this->x = x; };
     void setY(float y) { this->y = y; };

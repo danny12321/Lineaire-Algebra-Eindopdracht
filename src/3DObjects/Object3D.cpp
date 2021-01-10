@@ -17,22 +17,6 @@ void Object3D::translate(float x, float y, float z) {
     updatePoints(translation);
 }
 
-void Object3D::rotateAroundOriginX(float deg) {
-//    Matrix rotation = Matrix::getRotationMatrixX(deg);
-//    updatePoints(rotation);
-}
-
-void Object3D::rotateAroundOriginY(float deg) {
-//    Matrix rotation = Matrix::getRotationMatrixY(deg);
-//    updatePoints(rotation);
-}
-
-void Object3D::rotateAroundOriginZ(float deg) {
-//    Matrix rotation = Matrix::getRotationMatrixZ(deg);
-//    updatePoints(rotation);
-}
-
-
 Matrix Object3D::vectorToMatrix(const Vector3D &v) {
     return Matrix{{
                           {v.getX()},
@@ -97,7 +81,6 @@ void Object3D::rotateZ(float deg) {
     updatePoints(result);
 }
 
-
 Vector3D Object3D::getMiddle() {
     float x = 0;
     float y = 0;
@@ -110,20 +93,6 @@ Vector3D Object3D::getMiddle() {
     }
 
     return Vector3D{x / points.size(), y / points.size(), z / points.size()};
-}
-
-void Object3D::rotateAxis(const Vector3D &v, float deg) {
-//    Matrix axis = vectorToMatrix(v);
-//
-//    Matrix m1 = Matrix::getRotationMatrixM1(axis);
-//    Matrix m2 = Matrix::getRotationMatrixM2(axis);
-//    Matrix m3 = Matrix::getRotationMatrixX(deg);
-//    Matrix m4 = Matrix::getRotationMatrixM4(axis);
-//    Matrix m5 = Matrix::getRotationMatrixM5(axis);
-//
-//    Matrix result = m5 * m4 * m3 * m2 * m1;
-//
-//    updatePoints(result);
 }
 
 void Object3D::scale(float scaleX, float scaleY, float scaleZ) {
@@ -193,7 +162,7 @@ void Object3D::rotateLocalZ(float deg) {
 }
 
 void Object3D::rotateLocal(Vector3D& rotationPoint, float deg) {
-    Vector3D middle = getMiddle();
+    Vector3D middle = *localXyzPoints[0];
     Matrix localXMatrix {rotationPoint};
 
     Matrix translation = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
@@ -217,42 +186,6 @@ Vector3D Object3D::getNormalVector(const Vector3D &origin, const Vector3D &v1, c
     normalVector.setZ(normalVector.getZ() + origin.getZ());
 
     return normalVector;
-}
-
-void Object3D::rotateLocalAxis(float x, float y, float z) {
-//    rotateToOrigin();
-    Vector3D middle = getMiddle();
-
-    Matrix translation = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
-    Matrix rotationNegativeX = Matrix::getRotationNegativeMatrixX(rotationX);
-    Matrix rotationNegativeY = Matrix::getRotationNegativeMatrixY(rotationY);
-    Matrix rotationNegativeZ = Matrix::getRotationNegativeMatrixZ(rotationZ);
-    Matrix rotationPositiveX = Matrix::getRotationMatrixX(x);
-    Matrix rotationPositiveY = Matrix::getRotationMatrixY(y);
-    Matrix rotationPositiveZ = Matrix::getRotationMatrixZ(z);
-    Matrix translationBack = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
-    Matrix resultOne = translation * rotationNegativeX * rotationNegativeZ * rotationNegativeY * translationBack;
-    Matrix resultTwo = translation * rotationPositiveY * rotationPositiveZ * rotationPositiveX  * translationBack;
-
-    this->rotationX = x;
-    this->rotationY = y;
-    this->rotationZ = z;
-
-    updatePoints(resultOne);
-    updatePoints(resultTwo);
-}
-
-void Object3D::rotateToOrigin() {
-    Vector3D middle = getMiddle();
-
-    Matrix translation = Matrix::getTranslationMatrix(middle.getX(), middle.getY(), middle.getZ());
-    Matrix rotationNegativeX = Matrix::getRotationNegativeMatrixX(rotationX);
-    Matrix rotationNegativeY = Matrix::getRotationNegativeMatrixY(rotationY);
-    Matrix rotationNegativeZ = Matrix::getRotationNegativeMatrixZ(rotationZ);
-    Matrix translationBack = Matrix::getTranslationMatrix(-middle.getX(), -middle.getY(), -middle.getZ());
-    Matrix resultOne = translation * rotationNegativeX * rotationNegativeZ * rotationNegativeY * translationBack;
-
-    updatePoints(resultOne);
 }
 
 void Object3D::resetXyzAxis() {

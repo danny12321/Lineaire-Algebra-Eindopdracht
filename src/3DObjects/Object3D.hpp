@@ -26,25 +26,13 @@ public:
     void translateLocalY(float distance);
     void translateLocalZ(float distance);
 
-    void rotateAroundOriginX(float deg);
-    void rotateAroundOriginY(float deg);
-    void rotateAroundOriginZ(float deg);
-
-    void rotateLocalAxis(float x, float y, float z);
-
-    void rotateToOrigin();
-
-    void rotateX(float deg);
-    void rotateY(float deg);
-    void rotateZ(float deg);
-
     void rotateLocalX(float deg);
     void rotateLocalY(float deg);
     void rotateLocalZ(float deg);
 
-    void rotateLocal(Vector3D &rotationPoint, float deg);
-
-    void rotateAxis(const Vector3D& v, float deg);
+    void rotateX(float deg);
+    void rotateY(float deg);
+    void rotateZ(float deg);
 
     void scale(float scaleX, float scaleY, float scaleZ);
 
@@ -59,6 +47,7 @@ public:
     [[nodiscard]] int getBlueColor() const {return b;};
 
     virtual void update(const EventSystem &system) {};
+
     virtual void collide(Object3D& collider) {};
 
     void toOrigin();
@@ -90,10 +79,6 @@ protected:
     std::vector<Line*> boundingBoxLines;
     std::vector<Vector3D*> boundingBox;
 private:
-    float rotationX = 0;
-    float rotationY = 0;
-    float rotationZ = 0;
-
     float positiveX = 0;
     float negativeX = 0;
     float positiveY = 0;
@@ -103,6 +88,8 @@ private:
 
     bool showBoundingBox = false;
     bool showLocalXyz = false;
+
+    void rotateLocal(Vector3D &rotationPoint, float deg);
 
     Matrix vectorToMatrix(const Vector3D& v);
     void updatePoints(const Matrix& m);
